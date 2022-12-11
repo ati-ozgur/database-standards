@@ -1,27 +1,13 @@
-\documentclass[10pt,a4paper,draft]{article}
-\usepackage[utf8x]{inputenc}
+# Karkas SQL Server Veri tabanı Standartları
 
-\newcommand{\authorName}{Atilla \"Ozg\"ur}
-\newcommand{\titleName}{Karkas SQL Server Veri tabanı Standartları}
+## Kurulum Notları
 
-\input{latexAndBibliography/usePackageAndDefinitions}
-\usepackage{booktabs}
-
-\begin{document}
-
-\author{Atilla Özgür}
-\title{Karkas SQL Server Veri Tabanı Standartları}
-
-\maketitle
-
-\section{Kurulum Notları}
-
-Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish\_CI\_AS seçilmelidir. 
+Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir. 
 Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır. 
-Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hemde türkçe bilgi, yazı değerleri veri tabanında  varchar yada char olarak tutulmalıdır.
+Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında  varchar yada char olarak tutulmalıdır.
 
 
-\section{Şema (Schema) Kavramı}
+## Şema (Schema) Kavramı
 
 SQL Server şema (schema) kavramını en iyi şekilde uygulayan veri tabanları arasındadır.
 Bu yüzden schema yapısının SQL server veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
@@ -31,27 +17,27 @@ Referential  Integrity korunması açısından bütün uygulama tek bir veritaba
 Örneğin ihtiyaç duyduğunuz modullerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim. 
 Bu yapıda aşağıdaki şemaların açılması uygun olacaktır.
 
-\begin{itemize}
-\item ORTAK
-\item TT\_ORTAK
-\item MUHASEBE
-\item TT\_MUHASEBE
-\item INSAN\_KAYNAKLARI
-\item TT\_INSAN\_KAYNAKLARI
-\item BORDRO
-\item TT\_BORDRO
-\item OZLUK\_BILGILERI
-\item TT\_OZLUK\_BILGILERI
-\item FIRMALAR
-\item TT\_FIRMALAR
 
-\end{itemize}
+- ORTAK
+- TT_ORTAK
+- MUHASEBE
+- TT_MUHASEBE
+- INSAN_KAYNAKLARI
+- TT_INSAN_KAYNAKLARI
+- BORDRO
+- TT_BORDRO
+- OZLUK_BILGILERI
+- TT_OZLUK_BILGILERI
+- FIRMALAR
+- TT_FIRMALAR
+
+
 
 
 Burada muhasebe, insan kaynakları ve bordro şemaları zaten ihtiyaç duyulan şemalardır.
 Bunlara ek olarak kişi bilgilerinin tutulması için ad, soyad, kimlik bilgileri etc ORTAK şeması önerilmektedir. 
-TT\_ORTAK şeması buradaki bilgiler için gerekli tanım tablolarını tutacaktır.
-Örneğin TT\_ORTAK.CINSIYET ismindeki bir tanım tablosu cinsiyet bilgileri tutabilir.
+TT_ORTAK şeması buradaki bilgiler için gerekli tanım tablolarını tutacaktır.
+Örneğin TT_ORTAK.CINSIYET ismindeki bir tanım tablosu cinsiyet bilgileri tutabilir.
 Burada Kisi için tutulacak bilgiler herkes için kesin tutulması gereken bilgilerdir. 
 Örneğin ad soyad, tc kimlik no, resim gibi. 
 Ama eger sadece yazılımı kullanan kurumdaki, kişilere ait  (örneğin kurum sicil no, kurum eposta, kurum telefon) gibi bilgiler  var ise  bunların farklı şemada tutulması daha yararlı olacaktır. 
@@ -70,11 +56,9 @@ Bu modul 2-3 ana modul olarak ayrılabilir.
 Örneğin personel için aşağıdaki gibi bir ayrım olabilir.
 
 
-\begin{itemize}
-\item PERSONEL
-\item PERSONEL\_IZIN
-\item PERSONEL\_HARCAMALAR
-\end{itemize}
+- PERSONEL
+- PERSONEL_IZIN
+- PERSONEL_HARCAMALAR
 
 
 Ayrıca gecici daha sonra silinebilecek tabloların tutulması için GECICI veya TEMP isminde bir şemada eklenmesi uygun olacaktır.
@@ -84,32 +68,28 @@ Aynı şekilde kısa süreli yedek işlemleri için, karışık bir güncelleme 
 
 Her modul ilişkileri (relations) gösteren diagramlara sahip olmalıdır.
 
-\missingfigure{Örnek diagram ekle}
+TODO: Örnek diagram ekle
 
-
-
-\subsection{Şema, Tablo, Kolon İsimlendirme}
+## Şema, Tablo, Kolon İsimlendirme
 
 Şema ismi olarak kullandığınız isimleri tablo isimleri olarak kullanmayın. 
-Yani eğer BORDRO diye bir şemanız varsa, bu şema icinde veya diğer şemaların içinde BORDRO diye bir tablonuz olmamalıdır.
+Yani eğer BORDRO diye bir şemanız varsa, bu şema içinde veya diğer şemaların içinde BORDRO diye bir tablonuz olmamalıdır.
 
 VS.NET içinde proje ismi olarak kullanacağınız bir ismi şema ismi  olarak kullanmayınız.
-Yada şema isimlerinizi, VS.NET içinde	proje ismi  olarak vermeyin.
-C\# Derleyici (C\# Compiler)  bu durumda sorun çıkarmaktadır.		 
+Yada şema isimlerinizi, VS.NET içinde proje ismi olarak vermeyin.
+C# Derleyici (C# Compiler)  bu durumda sorun çıkarmaktadır.
+
 
  
 
 
-Veritabanındaki Tablo ve Şema isimleri tüm harfler büyük, Kelimeler arasında ise \_ olacak şekilde seçilmelidir.
+Veritabanında oluşturulan Tablo ve Şema isimleri tüm harfler büyük, Kelimeler arasında ise _ olacak şekilde seçilmelidir.
 
-\begin{itemize}
 
-\item INSAN\_KAYNAKLARI.ILAC\_ALIMI\_ALINAN\_ILACLAR		 
-\item ORTAK.KISI\_EK\_BILGILER		 
-\item MUHASEBE.FIS		 
-\item MUHASEBE.FIS\_DETAY 
-
-\end{itemize}
+- INSAN_KAYNAKLARI.ILAC_ALIMI_ALINAN_ILACLAR
+- ORTAK.KISI_EK_BILGILER
+- MUHASEBE.FIS
+- MUHASEBE.FIS_DETAY
 
 
 \subsubsection{Kolon İsimlendirme}
@@ -163,8 +143,8 @@ Tablo Adı & Primary Key Adı \\
 \midrule
 ORTAK.KISI & KisiKey \\ 
 MUHASEBE.FIS & FisKey \\ 
-BORDRO.ILAC\_ALIMI\_ALINAN\_ILACLAR & IlacAlimiAlinanIlaclarKey \\ 
-ORTAK.KISI\_EK\_BILGILER & KisiEkBilgilerKey \\ 
+BORDRO.ILAC_ALIMI_ALINAN_ILACLAR & IlacAlimiAlinanIlaclarKey \\ 
+ORTAK.KISI_EK_BILGILER & KisiEkBilgilerKey \\ 
 \bottomrule
 \end{tabular} 
 
@@ -180,10 +160,10 @@ Tablo Adı & Primary Key Adı \\
 
 \midrule
 
-TT\_ORTAK.Cinsiyet & CinsiyetTipNo \\ 
-TT\_ORTAK.SEHIR & SehirNo  \\ 
-TT\_OZGECMIS.EGITIM\_TIP & EgitimTipNo \\ 
-TT\_OZGECMIS.YABANCI\_DIL\_SINAV\_TUR & YabanciDilSinavTurNo \\ 
+TT_ORTAK.Cinsiyet & CinsiyetTipNo \\ 
+TT_ORTAK.SEHIR & SehirNo  \\ 
+TT_OZGECMIS.EGITIM_TIP & EgitimTipNo \\ 
+TT_OZGECMIS.YABANCI_DIL_SINAV_TUR & YabanciDilSinavTurNo \\ 
 \bottomrule
 \end{tabular}
 
@@ -208,7 +188,7 @@ olur.
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 \begin{itemize}
 
-\item BILGI\_EDINME.DILEKCE
+\item BILGI_EDINME.DILEKCE
 	\begin{itemize}
 		\item DilekceKey
 		\item BasvuruSahibiKisiKey
@@ -229,8 +209,8 @@ Burada BasvuruSahibiKisiKey ORTAK.KISI tablosuna buyuk ihtimal ile referans verm
 KisiKey yerine BasvuruSahibiKisiKey kullanılması bu anahtarı dilekce basvuranı ifade ettiğini
 göstermektedir. Bu anahtar kullanılarak kisi adı soyadı gibi bilgilere ulaşılabilir.
 
-CevapIstekTip ve GelisYoluTip kolonları ile TT\_BILGI\_EDINME şemasında
-CEVAP\_ISTEK ve GELIS\_YOLU isminde tablolar olduğunu biliyoruz.
+CevapIstekTip ve GelisYoluTip kolonları ile TT_BILGI_EDINME şemasında
+CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
 
 
 
@@ -238,7 +218,7 @@ CEVAP\_ISTEK ve GELIS\_YOLU isminde tablolar olduğunu biliyoruz.
 
 
 
-\subsection{Kolon Veri Yapıları}
+## Kolon Veri Yapıları}
 
 \subsubsection{Primary Key}
 
@@ -339,40 +319,40 @@ Veri tabanında mümkün olduğunca stored procedure ve trigger olmamalı,
 bunların yerine .NET kodları ile çözüm bulunmaya çalışılmalıdır.
 
 
-Stored Procudures usp\_ ile, functionlar ufn\_ ile, triggerler ise utnX\_ ile başlamalıdır (X-->;i:insert, u:update, d:delete). 			
+Stored Procudures usp_ ile, functionlar ufn_ ile, triggerler ise utnX_ ile başlamalıdır (X-->;i:insert, u:update, d:delete). 			
 Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server 
 bunun System stored procedure'u olduğunu düşündüğü için ilk önce master veritabanında arayacaktır. 
   
   
 \section{İsimlendirme Konvansiyonu}  
   
-\subsection{İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar }  
+## İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar }  
 
 Stored Procudure'lara isim verirken tablo ismi + yaptığı işlem şeklinde  isim verin.
     
 
 \begin{itemize}
 \item Tablo Ismi + yaptığı iş 
-\item usp\_PersonelAraAdiVeSoyadiIle 
-\item usp\_Personel\_Oku\_Tum 
-\item usp\_MuhasebeYillikMizanHesapla
-\item usp\_BordroAylikBordroHesapla
+\item usp_PersonelAraAdiVeSoyadiIle 
+\item usp_Personel_Oku_Tum 
+\item usp_MuhasebeYillikMizanHesapla
+\item usp_BordroAylikBordroHesapla
 \end{itemize}
 
 Not bu isimler örnek olsun diye verilmiştir. 
 Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıdır.
 
-\subsection{İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
+## İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
 
 \begin{itemize}
-\item INSAN\_KAYNAKLARI.MUSTERI 
-\item TANIM\_TABLOLARI.NUFUS\_CUZDANI\_VERILIS\_NEDENI
+\item INSAN_KAYNAKLARI.MUSTERI 
+\item TANIM_TABLOLARI.NUFUS_CUZDANI_VERILIS_NEDENI
 \end{itemize}  
 
-Schema ismi + Tablo ismi, 2 kelimeden fazla olan isimler \_ ile ayrılıyor. 
+Schema ismi + Tablo ismi, 2 kelimeden fazla olan isimler _ ile ayrılıyor. 
 Tablo ve görüntülere (view) ayrı isimler vermiyoruz.		  
 
-\subsection{İsimlendirme Konvansiyonu - Column-Kolon}  
+## İsimlendirme Konvansiyonu - Column-Kolon}  
 Her kelimenin ilk harfi büyük yazılır. 
 \begin{itemize}
 \item MusteriKey 
@@ -382,19 +362,19 @@ Her kelimenin ilk harfi büyük yazılır.
 \end{itemize}  
 
 
-\subsection{İsimlendirme Konvansiyonu - Index}  
+## İsimlendirme Konvansiyonu - Index}  
 
-IX\_TabloIsmi\_KolonIsimleri  veya UQ\_TabloIsmi\_KolonIsimleri şeklinde kullanılmalıdır.
+IX_TabloIsmi_KolonIsimleri  veya UQ_TabloIsmi_KolonIsimleri şeklinde kullanılmalıdır.
 Her kelimenin ilk harfi büyük yazılır.
 Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
 
 \begin{itemize}
 \item 
-\item IX\_Musteri\_MusteriNo
-\item IX\_Satislar\_TipNo
-\item IX\_Satislar\_MusteriKey
-\item UQ\_Musteri\_VergiNo
+\item IX_Musteri_MusteriNo
+\item IX_Satislar_TipNo
+\item IX_Satislar_MusteriKey
+\item UQ_Musteri_VergiNo
 
 \end{itemize}  
 
@@ -403,35 +383,35 @@ Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
 
 
-\subsection{İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)}  
+## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)}  
 \begin{itemize}
-\item  FK\_TabloIsmi1KolonIsmi1FK\_TabloIsmi2KolonIsmi2 
-\item FK\_MusteriMusteriNoSiparisMusteriNo
+\item  FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
+\item FK_MusteriMusteriNoSiparisMusteriNo
 \end{itemize}
 Her kelimenin ilk harfi büyük yazılır. 
   
-\subsection{İsimlendirme Konvansiyonu - Default - Varsayılan}  
+## İsimlendirme Konvansiyonu - Default - Varsayılan}  
 \begin{itemize}
-\item DF\_
-\item DF\_PERSONEL\_IlkGirisTarihi 
+\item DF_
+\item DF_PERSONEL_IlkGirisTarihi 
 \end{itemize}  
   
 SQL Server DF veriyor. Management Studio icinde Default'ları verirseniz, İsimlendirme düzgün olur. 		  
 
-\subsection{İsimlendirme Konvansiyonu - Constraint }  
+## İsimlendirme Konvansiyonu - Constraint }  
 \begin{itemize}
-\item CK\_
-\item CK\_OKUL\_BILGILERI\_GirisSenesi  
+\item CK_
+\item CK_OKUL_BILGILERI_GirisSenesi  
 \end{itemize}  
   
 SQL Server CK veriyor. Management Studio icinde Constarint yazarsanız, İsimlendirme düzgün olur. 				 
   
-\subsection{İsimlendirme Konvansiyonu - Trigger - Tetikleyici  }  
+## İsimlendirme Konvansiyonu - Trigger - Tetikleyici  }  
 utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir kelime gelicektir. 
 
 \begin{itemize}
-\item utrX\_ + tablo ismi + islem (insert (i), update (u), delete (d))
-\item utrX\_ORTAK\_KISI\_Delete
+\item utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
+\item utrX_ORTAK_KISI_Delete
 \end{itemize}  
 
   
