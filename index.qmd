@@ -1,5 +1,5 @@
 ---
-title: "database-standards"
+title: "Database standards"
 ---
 
 ## Quarto
