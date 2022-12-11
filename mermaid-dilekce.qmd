@@ -1,0 +1,12 @@
+```{mermaid}
+erDiagram
+    DILEKCE {
+        uniqueidentifier DilekceKey
+        string GonderenIP
+        string DilekceIcerik
+        int CevapIstekTurNo
+        int GelisYoluTurNo
+        uniqueidentifier VatandasBasvuruReferansKey
+    }
+```
+

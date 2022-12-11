@@ -161,18 +161,8 @@ Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon i
 
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 
+{{< include ./mermaid-dilekce.qmd >}}
 
-```{mermaid}
-erDiagram
-    DILEKCE {
-        uniqueidentifier DilekceKey
-        string GonderenIP
-        string DilekceIcerik
-        int CevapIstekTurNo
-        int GelisYoluTurNo
-        uniqueidentifier VatandasBasvuruReferansKey
-    }
-```
 
 Bu tabloyu okuduğumuzda 
 
