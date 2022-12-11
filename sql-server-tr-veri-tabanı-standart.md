@@ -162,18 +162,18 @@ Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon i
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 
 
-- BILGI_EDINME.DILEKCE
+```{mermaid}
 
-- DilekceKey
+erDiagram
+    BILGI_EDINME.DILEKCE {
+        uniqueidentifier DilekceKey
+        string GonderenIP
+        string DilekceIcerik
+        int GelisYoluTip
+        uniqueidentifier VatandasBasvuruReferansKey
+    }
 
-
-- GonderenIP
-- DilekceIcerik
-
-
-- GelisYoluTip
-- VatandasBasvuruReferansKey
-
+```
 
 Bu tabloyu okuduğumuzda DilekceKey primary key, 
 BasvuruSahibiKisiKey ve VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
