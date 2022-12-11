@@ -274,13 +274,13 @@ Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
 
 
   
-# Yazılım Geliştirme Yetkileri
+## Yazılım Geliştirme Yetkileri
 
 Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması ve SQL Sever Management Studio üzerinde işlem yapılırken bu  kullanıcılar ile sisteme girilmesi.düşünülmelidir.
 En doğrusu yazılım geliştirici kullanıcılarının bir role atanması ve bu rolün kısıtlanması olabilir.
 
   	 
-# Stored Procedures - Functions
+## Stored Procedures - Functions
 
 Yazılım geliştiriciler Stored Procedure yazma gereksinimi duyarlarsa bunu veritabanı yöneticisi ve takım liderlerinin onayını	aldıktan sonra yapabileceklerdir.
 Veri tabanında mümkün olduğunca stored procedure ve trigger olmamalı, bunların yerine .NET kodları ile çözüm bulunmaya çalışılmalıdır.
@@ -293,9 +293,9 @@ Stored Procudures usp_ ile, functionlar ufn_ ile, triggerler ise utnX_ ile başl
 Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server bunun System stored procedure'u olduğunu düşündüğü için ilk önce master veritabanında arayacaktır. 
   
   
-# İsimlendirme Konvansiyonu
+## İsimlendirme Konvansiyonu
   
-## İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar } 
+### İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar } 
 
 Stored Procudure'lara isim verirken modül/ ana tablo ismi + yaptığı işlem şeklinde isim verin.
     
@@ -309,7 +309,7 @@ Stored Procudure'lara isim verirken modül/ ana tablo ismi + yaptığı işlem �
 Not bu isimler örnek olsun diye verilmiştir. 
 Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıdır.
 
-## İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
+### İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
 
 
 - INSAN_KAYNAKLARI.MUSTERI 
@@ -324,7 +324,7 @@ Yada bilgiler daha farklı tutulduğu için eski bir tablo, view yapılabilir.
 Bu tür durumlarda isim aynı kaldığı için istemci programları sorunsuz çalışacaktır.
 
 
-## İsimlendirme Konvansiyonu - Column-Kolon
+### İsimlendirme Konvansiyonu - Column-Kolon
 
 Her kelimenin ilk harfi büyük yazılır. 
 
@@ -334,7 +334,7 @@ Her kelimenin ilk harfi büyük yazılır.
 - MusteriKey
 
 
-## İsimlendirme Konvansiyonu - Index
+### İsimlendirme Konvansiyonu - Index
 
 IX_TabloIsmi_KolonIsimleri  veya UQ_TabloIsmi_KolonIsimleri şeklinde kullanılmalıdır.
 Her kelimenin ilk harfi büyük yazılır.
@@ -346,7 +346,7 @@ Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 - IX_Satislar_MusteriKey
 - UQ_Musteri_VergiNo
 
-## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)
+### İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)
 
 - FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
 - FK_MusteriMusteriNoSiparisMusteriNo
@@ -354,7 +354,7 @@ Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 Her kelimenin ilk harfi büyük yazılır. 
 
 
-## İsimlendirme Konvansiyonu - Default - Varsayılan
+### İsimlendirme Konvansiyonu - Default - Varsayılan
 
 - DF_
 - DF_PERSONEL_IlkGirisTarihi 
@@ -363,7 +363,7 @@ Her kelimenin ilk harfi büyük yazılır.
 SQL Server DF veriyor.
 Management Studio icinde Default'ları verirseniz, İsimlendirme düzgün olur. 
 
-## İsimlendirme Konvansiyonu - Constraint 
+### İsimlendirme Konvansiyonu - Constraint 
 
 - CK_
 - CK_OKUL_BILGILERI_GirisSenesi  
@@ -373,14 +373,14 @@ Management Studio icinde Default'ları verirseniz, İsimlendirme düzgün olur.
 SQL Server CK veriyor. 
 Management Studio icinde Constarint yazarsanız, İsimlendirme düzgün olur.
   
-## İsimlendirme Konvansiyonu - Trigger - Tetikleyici  
+### İsimlendirme Konvansiyonu - Trigger - Tetikleyici  
 
 utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir kelime gelicektir. 
 
 - utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
 - utrX_ORTAK_KISI_Delete
   
-# Düzenleme Geçmişi
+## Düzenleme Geçmişi
 
 |  Versiyon  |  Yazarlar | Tarih  |   Yapılan Değişiklikler |
 |---|---|---|---|
