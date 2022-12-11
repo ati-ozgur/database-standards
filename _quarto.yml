@@ -1,9 +1,18 @@
 project:
-  title: "database-standards"
+  type: book
   output-dir: _output
 
-toc: true
-number-sections: true
+book:
+  title: "Database standards"
+  author: "Atilla Özgür"
+  date: today
+  date-format: "YYYY-MM-DD"
+  chapters:
+    - index.qmd
+
+
+#toc: true
+#number-sections: true
 #bibliography: references.bib  
   
 format:
@@ -14,3 +23,4 @@ format:
     documentclass: report
     margin-left: 30mm
     margin-right: 30mm
+
