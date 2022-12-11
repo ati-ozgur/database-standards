@@ -10,11 +10,11 @@ book:
   chapters:
     - index.qmd
     - sql-server-tr-veri-tabanı-standart.qmd
-    - postgres-standards-en.md
+#    - postgres-standards-en.md
 
 
-#toc: true
-#number-sections: true
+toc: true
+number-sections: true
 #bibliography: references.bib  
   
 format:
