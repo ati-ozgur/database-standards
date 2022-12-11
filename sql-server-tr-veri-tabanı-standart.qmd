@@ -163,29 +163,30 @@ Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon i
 
 
 ```{mermaid}
-
 erDiagram
-    BILGI_EDINME.DILEKCE {
+    DILEKCE {
         uniqueidentifier DilekceKey
         string GonderenIP
         string DilekceIcerik
-        int GelisYoluTip
+        int CevapIstekTurNo
+        int GelisYoluTurNo
         uniqueidentifier VatandasBasvuruReferansKey
     }
-
 ```
 
-Bu tabloyu okuduğumuzda DilekceKey primary key, 
-BasvuruSahibiKisiKey ve VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
-CevapIstekTip ve GelisYoluTip tanım tablolarına referans eden bilgiler.
+Bu tabloyu okuduğumuzda 
+
+- DilekceKey primary key, 
+- BasvuruSahibiKisiKey ana tablolara referans eden foreign key
+-  VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
+-  CevapIstekTurNo tanım tablolarına referans eden bilgiler. 
+-  GelisYoluTurNo tanım tablolarına referans eden bilgiler.
 
 Burada BasvuruSahibiKisiKey ORTAK.KISI tablosuna büyük ihtimal ile referans vermektedir.
-KisiKey yerine BasvuruSahibiKisiKey kullanılması bu anahtarı dilekce basvuranı ifade ettiğini
-göstermektedir. Bu anahtar kullanılarak kisi adı soyadı gibi bilgilere ulaşılabilir.
+KisiKey yerine BasvuruSahibiKisiKey kullanılması bu anahtarı dilekce basvuranı ifade ettiğini göstermektedir. 
+Bu anahtar kullanılarak kisi adı soyadı gibi bilgilere ulaşılabilir.
 
-CevapIstekTip ve GelisYoluTip kolonları ile TT_BILGI_EDINME şemasında
-CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
-
+CevapIstekTurNo ve GelisYoluTurNo kolonları ile TT_BILGI_EDINME şemasında veya başka bir TT şemasında CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
 
 ## Kolon Veri Yapıları
 

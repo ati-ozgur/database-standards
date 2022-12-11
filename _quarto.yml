@@ -9,7 +9,7 @@ book:
   date-format: "YYYY-MM-DD"
   chapters:
     - index.qmd
-    - sql-server-tr-veri-tabanı-standart.md
+    - sql-server-tr-veri-tabanı-standart.qmd
     - postgres-standards-en.md
 
 
