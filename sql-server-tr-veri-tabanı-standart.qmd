@@ -261,6 +261,7 @@ Yukarıdakı kısıtlama giris senesinin 1900 ile şu an bulunduğumuz sene aras
 
 
 ### Resim Dosya gibi Binary Değerler
+
 Resim veya binary data tutmak için varbinary(max) tercih edin. 
 Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
  
@@ -273,40 +274,37 @@ Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
 
 
   
-\section{Yazılım Geliştirme Yetkileri}  									 
-Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması 
-ve SQL Sever Management Studio üzerinde işlem yapılırken bu 
-kullanıcılar ile sisteme girilmesi.düşünülmelidir.
+# Yazılım Geliştirme Yetkileri
+
+Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması ve SQL Sever Management Studio üzerinde işlem yapılırken bu  kullanıcılar ile sisteme girilmesi.düşünülmelidir.
 En doğrusu yazılım geliştirici kullanıcılarının bir role atanması ve bu rolün kısıtlanması olabilir.
 
   	 
-\section{Stored Procedures - Functions}  									 
-Yazılım geliştiriciler Stored Procedure yazma gereksinimi duyarlarsa 
-bunu veritabanı yöneticisi ve takım liderlerinin onayını	aldıktan sonra   yapabileceklerdir.
-Veri tabanında mümkün olduğunca stored procedure ve trigger olmamalı,
-bunların yerine .NET kodları ile çözüm bulunmaya çalışılmalıdır.
+# Stored Procedures - Functions
 
+Yazılım geliştiriciler Stored Procedure yazma gereksinimi duyarlarsa bunu veritabanı yöneticisi ve takım liderlerinin onayını	aldıktan sonra yapabileceklerdir.
+Veri tabanında mümkün olduğunca stored procedure ve trigger olmamalı, bunların yerine .NET kodları ile çözüm bulunmaya çalışılmalıdır.
 
-Stored Procudures usp_ ile, functionlar ufn_ ile, triggerler ise utnX_ ile başlamalıdır (X-->;i:insert, u:update, d:delete). 			
-Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server 
-bunun System stored procedure'u olduğunu düşündüğü için ilk önce master veritabanında arayacaktır. 
+Stored procedure, function ve trigger'lar için macar notasyonu kullanıp kullanılmayacağına başta karar verilmelidir.
+Yazılım geliştirme araçlarının daha gelişmiş olması sebebi ile artık macar notasyonuna olan ihtiyaç azalmıştır.
+Ama eğer macar notasyonu kullanıyorsanız: 
+Stored Procudures usp_ ile, functionlar ufn_ ile, triggerler ise utnX_ ile başlamalıdır (X-->;i:insert, u:update, d:delete).
+
+Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server bunun System stored procedure'u olduğunu düşündüğü için ilk önce master veritabanında arayacaktır. 
   
   
-\section{İsimlendirme Konvansiyonu}  
+# İsimlendirme Konvansiyonu
   
-## İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar }  
+## İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar } 
 
-Stored Procudure'lara isim verirken tablo ismi + yaptığı işlem şeklinde  isim verin.
+Stored Procudure'lara isim verirken modül/ ana tablo ismi + yaptığı işlem şeklinde isim verin.
     
+- Modül Ismi + yaptığı iş 
+- PersonelAraAdiVeSoyadiIle 
+- Personel_Oku_Tum 
+- MuhasebeYillikMizanHesapla
+- BordroAylikBordroHesapla
 
-
-- Tablo Ismi + yaptığı iş 
-- usp_PersonelAraAdiVeSoyadiIle 
-- usp_Personel_Oku_Tum 
-- usp_MuhasebeYillikMizanHesapla
-
-a
-\end{itemize}
 
 Not bu isimler örnek olsun diye verilmiştir. 
 Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıdır.
@@ -316,13 +314,18 @@ Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıd�
 
 - INSAN_KAYNAKLARI.MUSTERI 
 - TANIM_TABLOLARI.NUFUS_CUZDANI_VERILIS_NEDENI
-\end{itemize}  
 
 
 
-Tablo ve görüntülere (view) ayrı isimler vermiyoruz.		  
+Tablo ve görüntülere (view) ayrı isimler vermiyoruz.
+Bunun nedeni ihtiyaça göre tablo veya görüntünün değiştirilebilmesine izin vermektir.
+Örneğin çok kullanılan bir view, tablo yapılabilir.
+Yada bilgiler daha farklı tutulduğu için eski bir tablo, view yapılabilir.
+Bu tür durumlarda isim aynı kaldığı için istemci programları sorunsuz çalışacaktır.
 
-## İsimlendirme Konvansiyonu - Column-Kolon}  
+
+## İsimlendirme Konvansiyonu - Column-Kolon
+
 Her kelimenin ilk harfi büyük yazılır. 
 
 - MusteriKey 
@@ -331,84 +334,60 @@ Her kelimenin ilk harfi büyük yazılır.
 - MusteriKey
 
 
-
-
-## İsimlendirme Konvansiyonu - Index}  
+## İsimlendirme Konvansiyonu - Index
 
 IX_TabloIsmi_KolonIsimleri  veya UQ_TabloIsmi_KolonIsimleri şeklinde kullanılmalıdır.
 Her kelimenin ilk harfi büyük yazılır.
 Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
-
-
-- 
+ 
 - IX_Musteri_MusteriNo
 - IX_Satislar_TipNo
 - IX_Satislar_MusteriKey
+- UQ_Musteri_VergiNo
 
-o
+## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)
 
-\end{itemize}  
-
-
-
-
-
-
-## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)}  
-
--  FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
+- FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
 - FK_MusteriMusteriNoSiparisMusteriNo
-\end{itemize}
+
 Her kelimenin ilk harfi büyük yazılır. 
 
 
-## İsimlendirme Konvansiyonu - Default - Varsayılan}  
+## İsimlendirme Konvansiyonu - Default - Varsayılan
 
 - DF_
 - DF_PERSONEL_IlkGirisTarihi 
-\end{itemize}  
-  
 
-, İsimlendirme düzgün olur. 		  
 
-## İsimlendirme Konvansiyonu - Constraint }  
+SQL Server DF veriyor.
+Management Studio icinde Default'ları verirseniz, İsimlendirme düzgün olur. 
+
+## İsimlendirme Konvansiyonu - Constraint 
 
 - CK_
 - CK_OKUL_BILGILERI_GirisSenesi  
-\end{itemize}  
+
   
 
-, İsimlendirme düzgün olur. 				 
+SQL Server CK veriyor. 
+Management Studio icinde Constarint yazarsanız, İsimlendirme düzgün olur.
   
-## İsimlendirme Konvansiyonu - Trigger - Tetikleyici  }  
+## İsimlendirme Konvansiyonu - Trigger - Tetikleyici  
+
 utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir kelime gelicektir. 
-
 
 - utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
 - utrX_ORTAK_KISI_Delete
-\end{itemize}  
-
-
-
   
-\section{Düzenleme Geçmişi} 
+# Düzenleme Geçmişi
 
-\begin{tabular}{@{}llll@{}}
+|  Versiyon  |  Yazarlar | Tarih  |   Yapılan Değişiklikler |
+|---|---|---|---|
+|  0.1 | Atilla Özgür  | 2006  | İlk Yazım  |
+|  0.2 | Atilla Özgür  | 2008  | Fatih ile İç İşlerinde yapılan değişiklik  |
+|  0.3 | Atilla Özgür  | 2013-02-13  | Çok uzun bir aradan sonra bazı düzeltmeler  |
+|  0.4 | Atilla Özgür  | 2013-07-04  | Latex çevrimi, sectionlara ayırma , tümüyle tekrar yazıldı.  |
+|  0.5 | Atilla Özgür  | 2017-12-12  |  İŞKUR eğitimden önce değişiklikler. latex booktabs'a geçiş.  |
+|  0.6 | Atilla Özgür   | 2022-12-11  | quatro markdown geçiş. UTF8 cümle düzeltmeleri   |
 
-\toprule
-
- Versiyon & Yazarlar & Tarih & Yapılan Değişiklikler  \\ 
-
-\midrule
-
- 0.1 &  Atilla Özgür & 2006 & İlk Yazım   \\ 
- 0.2 &  Atilla Özgür & 2008 & Fatih ile İç İşlerinde yapılan değişiklik \\ 
- 0.3 &  Atilla Özgür & 2013-02-13 & Çok uzun bir aradan sonra bazı düzeltmeler  \\ 
- 0.4 &  Atilla Özgür & 2013-07-04 & Latex çevrimi, sectionlara ayırma , tümüyle tekrar yazıldı.  \\ 
- 0.5 &  Atilla Özgür & 2017-12-12 & İŞKUR eğitimden önce değişiklikler. latex booktabs'a geçiş.   \\ 
-\bottomrule
-\end{tabular}
-
-
-\end{document}
