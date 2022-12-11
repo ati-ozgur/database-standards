@@ -11,10 +11,10 @@ Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça 
 
 SQL Server şema (schema) kavramını en iyi şekilde uygulayan veri tabanları arasındadır.
 Bu yüzden schema yapısının SQL server veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
-Bu yapıda her ana modul için, "bir ana şema" + "bir tanım tablosu şema"'sı açılması tavsiye edilmektedir.
+Bu yapıda her ana modül için, "bir ana şema" + "bir tanım tablosu şema"'sı açılması tavsiye edilmektedir.
 Referential  Integrity korunması açısından bütün uygulama tek bir veritabanında çalışmalıdır.
 
-Örneğin ihtiyaç duyduğunuz modullerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim. 
+Örneğin ihtiyaç duyduğunuz modüllerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim. 
 Bu yapıda aşağıdaki şemaların açılması uygun olacaktır.
 
 
@@ -43,30 +43,26 @@ Burada Kisi için tutulacak bilgiler herkes için kesin tutulması gereken bilgi
 Ama eger sadece yazılımı kullanan kurumdaki, kişilere ait  (örneğin kurum sicil no, kurum eposta, kurum telefon) gibi bilgiler  var ise  bunların farklı şemada tutulması daha yararlı olacaktır. 
 
 Buraya FIRMALAR şeması muhasebe firmalarının fatura kesecekleri firma bilgileri için eklenmiştir.
-Firma, Kisi bilgileri bir çok modul tarafından ihtiyaç duyulan bilgiler oldukları için bunların ayrı şemalarda tutulmaları daha yararlı olacaktır.
+Firma, Kisi bilgileri bir çok modül tarafından ihtiyaç duyulan bilgiler oldukları için bunların ayrı şemalarda tutulmaları daha yararlı olacaktır.
 
 Son olarak Ozluk bilgileri, Bordro ve insan kaynaklarının ihtiyaç duydukları ortak bilgileri taşıyacaktır.
 Burada bu bilgiler sadece insan kaynakları şeması yada bordro şeması yerine ikisinin ortak kullandığı bir şemada olması daha uygundur.
-Yani diğer bir deyişle; eğer bir tablo birden fazla modul tarafından kullanılıyor ise, bu ortaklığı belirtecek yeni bir şema gerekirse açılmalıdır. 
-Bu şema ismi eğer dışarıdan veri alınıyorsa bunu anlatan bir isim, eğer 2 modulün ortak noktası ise, bu ortak nokta olabilir.
-Sadece 2 modul tarafından kullanılacak bir tablo ORTAK şemasını eklenmemelidir.
+Yani diğer bir deyişle; eğer bir tablo birden fazla modül tarafından kullanılıyor ise, bu ortaklığı belirtecek yeni bir şema gerekirse açılmalıdır. 
+Bu şema ismi eğer dışarıdan veri alınıyorsa bunu anlatan bir isim, eğer 2 modülün ortak noktası ise, bu ortak nokta olabilir.
+Sadece 2 modül tarafından kullanılacak bir tablo ORTAK şemasını eklenmemelidir.
 
-Ana modul şemalarından 10 taneden fazla tablo bulunması bu modulun buyuk olduğunu göstermektedir.
-Bu modul 2-3 ana modul olarak ayrılabilir. 
+Ana modül şemalarından 10 taneden fazla tablo bulunması bu modülün büyük bir modül olduğunu göstermektedir.
+Bu modül 2-3 ana modül olarak ayrılabilir.
 Örneğin personel için aşağıdaki gibi bir ayrım olabilir.
-
 
 - PERSONEL
 - PERSONEL_IZIN
 - PERSONEL_HARCAMALAR
 
-
-Ayrıca gecici daha sonra silinebilecek tabloların tutulması için GECICI veya TEMP isminde bir şemada eklenmesi uygun olacaktır.
+Ayrıca geçici daha sonra silinebilecek tabloların tutulması için GECICI veya TEMP isminde bir şemada eklenmesi uygun olacaktır.
 Aynı şekilde kısa süreli yedek işlemleri için, karışık bir güncelleme öncesinde ihtiyaç duyulabilecek yedek işlemleri için YEDEK şeması eklenebilir.
 
-
-
-Her modul ilişkileri (relations) gösteren diagramlara sahip olmalıdır.
+Her modül ilişkileri (relations) gösteren diyagramlara sahip olmalıdır.
 
 TODO: Örnek diagram ekle
 
@@ -79,12 +75,7 @@ VS.NET içinde proje ismi olarak kullanacağınız bir ismi şema ismi  olarak k
 Yada şema isimlerinizi, VS.NET içinde proje ismi olarak vermeyin.
 C# Derleyici (C# Compiler)  bu durumda sorun çıkarmaktadır.
 
-
- 
-
-
 Veritabanında oluşturulan Tablo ve Şema isimleri tüm harfler büyük, Kelimeler arasında ise _ olacak şekilde seçilmelidir.
-
 
 - INSAN_KAYNAKLARI.ILAC_ALIMI_ALINAN_ILACLAR
 - ORTAK.KISI_EK_BILGILER
@@ -92,8 +83,9 @@ Veritabanında oluşturulan Tablo ve Şema isimleri tüm harfler büyük, Kelime
 - MUHASEBE.FIS_DETAY
 
 
-\subsubsection{Kolon İsimlendirme}
-Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her kelime buyuk harf ile baslamalı, diğer harfler kucuk harf olmalıdır.
+### Kolon İsimlendirme
+
+Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her kelime bü harf ile baslamalı, diğer harfler kucuk harf olmalıdır.
 Kolon isimleri kullanılırken türkçe karakterler (İ,Ü,ı ..) kullanılmamalıdır.
 Bakınız aşağıdaki örnekler.
 
@@ -111,7 +103,7 @@ Bu sayede veritabanından otomatik rapor çıkaran araçların raporları daha a
 	
   
   
-\subsubsection{Kolon İsimlendirme - Primary Key}
+### Kolon İsimlendirme - Primary Key
 
 Primary key - Birincil anahtar isimlerinin nasıl olması gerektiğine proje başında karar verilmeli ve bu isimlendirmeye proje boyunca uyulmalıdır.
 Buna göre birincil anahtar için aşağıdaki kelimelerden biri seçilmelidir.
@@ -169,7 +161,7 @@ TT_OZGECMIS.YABANCI_DIL_SINAV_TUR & YabanciDilSinavTurNo \\
 
 
 
-\subsubsection{Kolon İsimlendirme - Foreign Key}
+### Kolon İsimlendirme - Foreign Key
 
 Kolonlarda ikincil anahtar isimleri verilirken dikkat edilmesi gereken kural,
 referans edilen tablonun bir tanım tablosumu yoksa bir ana tablomu olduğu kuralıdır.
@@ -186,15 +178,17 @@ kolon isminde bu durumun belirtilmesi ve aynı zamanda tablo isminin kullanılma
 olur.
 
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
-\begin{itemize}
+
 
 \item BILGI_EDINME.DILEKCE
-	\begin{itemize}
+	
 		\item DilekceKey
-		\item BasvuruSahibiKisiKey
+
+y
 		\item GonderenIP
 		\item DilekceIcerik
-		\item CevapIstekTip
+	
+	
 		\item GelisYoluTip
 		\item VatandasBasvuruReferansKey
 	\end{itemize}
@@ -205,7 +199,7 @@ Bu tabloyu okuduğumuzda DilekceKey primary key,
 BasvuruSahibiKisiKey ve VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
 CevapIstekTip ve GelisYoluTip tanım tablolarına referans eden bilgiler.
 
-Burada BasvuruSahibiKisiKey ORTAK.KISI tablosuna buyuk ihtimal ile referans vermektedir.
+Burada BasvuruSahibiKisiKey ORTAK.KISI tablosuna büyük ihtimal ile referans vermektedir.
 KisiKey yerine BasvuruSahibiKisiKey kullanılması bu anahtarı dilekce basvuranı ifade ettiğini
 göstermektedir. Bu anahtar kullanılarak kisi adı soyadı gibi bilgilere ulaşılabilir.
 
@@ -213,14 +207,9 @@ CevapIstekTip ve GelisYoluTip kolonları ile TT_BILGI_EDINME şemasında
 CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
 
 
+## Kolon Veri Yapıları
 
-
-
-
-
-## Kolon Veri Yapıları}
-
-\subsubsection{Primary Key}
+### Primary Key
 
 Birincil anahtar (Primary Key) konulmayan tablo olmayacaktır.
 Primary key değerleri olarak uniqueidentifier veya Identity seçilmeli proje boyunca benzer bir yapı kullanılmalıdır.
@@ -228,53 +217,53 @@ Primary key Sentetik Anahtar (Surrogate Key) olarak int IDENTITY değerleri yeri
 kod yazılması kolaylığı açısından değerlendirilmeli ve proje başlangıcında karar verilmelidir.
 Uniqueidentifier eğer PK olarak kullanılıyorsa default değer olarak newid() olmalıdır.
 
-\subsubsection{Foreign Key}
+### Foreign Key
 
-Eğer bir tablo içindeki kolon başka bir tabloya referans veriyorsa 
-kesinlikle foreign key tanımlanmalı ve bu			kolonun ismi TabloIsmiTipNo yada 
-TabloIsmiKey olarak tanımlanmalı. TipNo tanım tabloları için. Key ise normal 
-tablolar			için kullanılmalıdır.	
-TipNo yerine referans verilen tanımın türkçesine göre TurNo
-gibi diğer kelimelerde kullanılabilir.
-Eğer bir kolon ismi TurNo, TipNo, Turu, Tipi, RenkNo, BilgiNo gibi bir kelime ile bitiyorsa ise çok büyük ihtimal ile Tanım Tablolarına referans veriliyordur.
-TipNo(...) okunduğu zaman bir tanım tablosuna referans düşünülürken, Key ise   1..* veya 1..1 ilişkisini tanımlamalıdır.		 
+Eğer bir tablo içindeki kolon başka bir tabloya referans veriyorsa kesinlikle yabancı anahtar (foreign key) tanımlanmalıdır.
+Bu yabancı anahtar kolonun ismi TabloIsmiTipNo yada TabloIsmiKey olarak tanımlanmalıdır.
+Tanım tabloları için TipNo kullanılmalıdır.
+Normal modül tabloları için Key kullanılmalıdır.
+TipNo yerine referans verilen tanımın türkçesine göre TurNo gibi diğer kelimelerde kullanılabilir.
+Eğer bir kolon ismi TurNo, TipNo, Turu, Tipi, RenkNo, BilgiNo gibi bir kelime ile bitiyorsa ise Tanım Tablolarına referans veriliyordur.
+TipNo(...) okunduğu zaman bir tanım tablosuna referans düşünülürken, Key ise 1..* veya 1..1 ilişkisini ana modül tablolarına tanımlamalıdır.
+
+### Yazı Değerler (varchar...)
+
+Yazi değerleri eger değişken ise varchar ile, eğer sabit bir değer ise char olarak tutulmalıdır. Örneğin:
 
 
-\subsubsection{Yazı Değerler}
-
-Yazi degerleri eger değişken ise varchar ile, eğer sabit bir değer ise char olarak tutulmalıdır. Örneğin:
-
-\begin{itemize}
 \item Eğer bilgi girilen tip daima aynı sayıda ise örnek: Posta Kodu gibi char olarak tanımlanmalıdır.		 
 \item Eğer bilgi girilen değer değişken bir değer ise, ad soyad gibi varchar olarak tanımlanmalıdır.
-\end{itemize} 
+
+ 
 
 Eğer veri tabanında kullanılan genel dilden (türkçe olmayan) farklı değer girilebilir ise nchar,nvarchar tanımlanmalıdır.
 
-\subsubsection{Sayı Değerler}
+### Sayı Değerler
 
 Sayı değerleri için alabilecekleri aralıkları düşünerek tiny int, short int , int veya big int kullanınız. 
 
-\begin{itemize}
+
 
 \item   Tablodaki değer  -32,768 - 32,767   smallint veri yapısını kullanın.
 \item   eğer tamsayı değer  -2,147,483,648 - 2,147,483,647 arası ise int veri yapısını kullanın.
 
 \end{itemize} 
 
-\subsubsection{Para ve Ondalık Değerler}
+### Para ve Ondalık Değerler
 
-\begin{itemize}
+
 
 \item  Money SQL standartında olmadığından kullanılmamalıdır. 
 \item  Float ve double tam değerler değildir, yaklaşık değer olarak çalışırlar. 
 Para hesaplarında kesinlikle kullanılmamaları gerekir.
-\item Para değerleri numeric(18,2) veya decimal(18,2) olmalıdır. numeric ve decimal bir birlerinin alias'ıdır. 
+
+e decimal bir birlerinin alias'ıdır. 
 \item Eğer para değerlerinde daha fazla küsürata ihtiyaç var ise   numeric(18,4)-decimal(18,4) gibi artırılabilir. 
 
 \end{itemize} 
  			
-\subsubsection{Tarih Değerler}
+### Tarih Değerler
 
 Tarih değerleri 	datetime (3.33 milliseconds accuracy)  	Jan 1, 1753  --- Dec 31, 9999
 ,smalldatetime (1 minute accuracy) 	Jan 1, 1900  --- Jun 6, 2079		
@@ -283,27 +272,29 @@ değerleri arasını göstermektedir.
 örn: 01.01.1600 gibi bir değer SQL Server üzerinde hata verebilir.
 Tarih değerlerinin bu aralıkta olduğuna emin olunuz.
 
-\begin{itemize}
+
 
 \item Tarih bilgilerini tutarken smalldatetime tercih ediniz. 			
 \item Eğer sadece  yıl bilgisi tutacaksanız, Mezuniyet yılı smallint tutabilirsiniz. 
-Bu tür bir kolona constraint ekleyin.örn: 
+
+ 
   $  CHECK  (([GirisSene]>=(1900) AND   [GirisSene]<=datepart(year,getdate()))) $
 Yukarıdakı kısıtlama giris senesinin 1900 ile şu an bulunduğumuz sene arasında kalmasını sağlamaktadır.
 \end{itemize}  			
 
 
-\subsubsection{Resim Dosya gibi Binary Değerler}
+### Resim Dosya gibi Binary Değerler
 Resim veya binary data tutmak için varbinary(max) tercih edin. 
 Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
  
-\subsubsection{Diger Notlar}
+### Diger Notlar
 
-\begin{itemize}
+
 \item   Tablolarda mümkün olduğunca girilen bilgiler not null yapılmalıdır.
 \item   Eğer anlamlı bir default/varsayılan değer verilebiliyorsa verilmelidir. Örneğin GuncellemeTarih default now() verilebilir.
 \end{itemize}  			
-  		 
+
+ 
   
 \section{Yazılım Geliştirme Yetkileri}  									 
 Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması 
@@ -331,12 +322,13 @@ bunun System stored procedure'u olduğunu düşündüğü için ilk önce master
 Stored Procudure'lara isim verirken tablo ismi + yaptığı işlem şeklinde  isim verin.
     
 
-\begin{itemize}
+
 \item Tablo Ismi + yaptığı iş 
 \item usp_PersonelAraAdiVeSoyadiIle 
 \item usp_Personel_Oku_Tum 
 \item usp_MuhasebeYillikMizanHesapla
-\item usp_BordroAylikBordroHesapla
+
+a
 \end{itemize}
 
 Not bu isimler örnek olsun diye verilmiştir. 
@@ -344,22 +336,24 @@ Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıd�
 
 ## İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
 
-\begin{itemize}
+
 \item INSAN_KAYNAKLARI.MUSTERI 
 \item TANIM_TABLOLARI.NUFUS_CUZDANI_VERILIS_NEDENI
 \end{itemize}  
 
-Schema ismi + Tablo ismi, 2 kelimeden fazla olan isimler _ ile ayrılıyor. 
+
+ 
 Tablo ve görüntülere (view) ayrı isimler vermiyoruz.		  
 
 ## İsimlendirme Konvansiyonu - Column-Kolon}  
 Her kelimenin ilk harfi büyük yazılır. 
-\begin{itemize}
+
 \item MusteriKey 
 \item SonDegistirmeTarihi
 \item TipNo
 \item MusteriKey
-\end{itemize}  
+
+ 
 
 
 ## İsimlendirme Konvansiyonu - Index}  
@@ -369,12 +363,13 @@ Her kelimenin ilk harfi büyük yazılır.
 Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
 
-\begin{itemize}
+
 \item 
 \item IX_Musteri_MusteriNo
 \item IX_Satislar_TipNo
 \item IX_Satislar_MusteriKey
-\item UQ_Musteri_VergiNo
+
+o
 
 \end{itemize}  
 
@@ -384,37 +379,41 @@ Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
 
 ## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)}  
-\begin{itemize}
+
 \item  FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
 \item FK_MusteriMusteriNoSiparisMusteriNo
 \end{itemize}
 Her kelimenin ilk harfi büyük yazılır. 
-  
+
+ 
 ## İsimlendirme Konvansiyonu - Default - Varsayılan}  
-\begin{itemize}
+
 \item DF_
 \item DF_PERSONEL_IlkGirisTarihi 
 \end{itemize}  
   
-SQL Server DF veriyor. Management Studio icinde Default'ları verirseniz, İsimlendirme düzgün olur. 		  
+
+, İsimlendirme düzgün olur. 		  
 
 ## İsimlendirme Konvansiyonu - Constraint }  
-\begin{itemize}
+
 \item CK_
 \item CK_OKUL_BILGILERI_GirisSenesi  
 \end{itemize}  
   
-SQL Server CK veriyor. Management Studio icinde Constarint yazarsanız, İsimlendirme düzgün olur. 				 
+
+, İsimlendirme düzgün olur. 				 
   
 ## İsimlendirme Konvansiyonu - Trigger - Tetikleyici  }  
 utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir kelime gelicektir. 
 
-\begin{itemize}
+
 \item utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
 \item utrX_ORTAK_KISI_Delete
 \end{itemize}  
 
-  
+
+ 
   
 \section{Düzenleme Geçmişi} 
 
