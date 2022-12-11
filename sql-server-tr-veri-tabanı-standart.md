@@ -2,7 +2,12 @@
 
 ## Kurulum Notları Collation
 
-Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir.
+Veritabanı kurulurken, SQL Server içinden Collation olarak aşağıdakilerden biri seçilmelidir.
+
+- Turkish_CI_AS : Turkish, case-insensitive, accent-sensitive, kana type-insensitive, width-insensitive
+- Turkish_100_CI_AS_SC_UTF8: Turkish-100, case-insensitive, accent-sensitive, kana type-insensitive, width-insensitive, supplementary characters, UTF8 (SQL Server 2019)
+
+Buradaki kelimelerin anlamı aşağıdaki gibidir.
 
 - CI: Case Insensitive (Büyük küçük harf ayrımı yok)
 - CS: Case sensitive (Büyük küçük harf ayrımı var)
@@ -10,9 +15,7 @@ Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seç
 
 Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır.
 Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında varchar yada char olarak tutulmalıdır.
-
-TODO: Sql server 2019 utf8 desteğine bak
-
+SQL Server 2019 ve sonrasını kullanıyorsanız, UTF8 seçmeniz tavsiye edilir.
 
 ## Şema (Schema) Kavramı
 
@@ -71,7 +74,7 @@ TODO: Örnek diagram ekle
 
 ## Şema, Tablo, Kolon İsimlendirme
 
-Şema ismi olarak kullandığınız isimleri tablo isimleri olarak kullanmayın. 
+Şema ismi olarak kullandığınız isimleri tablo isimleri olarak kullanmayın.
 Yani eğer BORDRO diye bir şemanız varsa, bu şema içinde veya diğer şemaların içinde BORDRO diye bir tablonuz olmamalıdır.
 
 VS.NET içinde proje ismi olarak kullanacağınız bir ismi şema ismi  olarak kullanmayınız.
@@ -91,93 +94,70 @@ Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her keli
 Kolon isimleri kullanılırken türkçe karakterler (İ,Ü,ı ..) kullanılmamalıdır.
 Bakınız aşağıdaki örnekler.
 
-
-
 - Ad
 - Soyad
 - IkinciAdi
 - TcKimlikNo
 - SehirNo
 
-
-Raporlama açısından bütün tablo'ların ve anlamı açık olmayan kolanların descriptionlarının yazılması tavsiye edilir.
+Raporlama açısından bütün tabloların ve anlamı açık olmayan kolanların tanımlarının (description) yazılması tavsiye edilir.
+Ama tanım yazılması iyi isim verilmesinden daha önemsizdir.
+Tablo ve kolon isimlerinin iyi seçilmesi son derece önemlidir.
 Bu sayede veritabanından otomatik rapor çıkaran araçların raporları daha anlamlı olacaktır.
-	
-  
-  
+
 ### Kolon İsimlendirme - Primary Key
 
 Primary key - Birincil anahtar isimlerinin nasıl olması gerektiğine proje başında karar verilmeli ve bu isimlendirmeye proje boyunca uyulmalıdır.
 Buna göre birincil anahtar için aşağıdaki kelimelerden biri seçilmelidir.
 
-
 - Key
 - ID
 - Id
 
-
 Bazı projelerde KayitNo kullanılmaktadır.
 Bu kelime uzun olduğu için bana göre yukarıdakiler daha iyi seçimlerdir.
-
 
 Key anahtar, Id Identity (kimlik) kelimelerinin kısaltmasıdır.
 Projede bunlardan sadece birinin kullanılması daha uygun olacaktır.
 Aynı şekilde ID ve Id olarak karar verilmeli ve hep aynı şekilde kullanılmalıdır.
 
-Aşağıdaki örneklerde Key kelimesinin seçilmiştir.
+Aşağıdaki örneklerde Key kelimesi seçilmiştir.
 
 Birincil Anahtarları TABLO ADI + Key olarak verilmesi tavsiye edilmektedir.
 Örneğin:
 
-\begin{tabular}{@{}ll@{}}
-
-\toprule
-
-Tablo Adı & Primary Key Adı \\ 
-\midrule
-ORTAK.KISI & KisiKey \\ 
-MUHASEBE.FIS & FisKey \\ 
-BORDRO.ILAC_ALIMI_ALINAN_ILACLAR & IlacAlimiAlinanIlaclarKey \\ 
-ORTAK.KISI_EK_BILGILER & KisiEkBilgilerKey \\ 
-\bottomrule
-\end{tabular} 
+| Tablo Adı           | Birinci Anahtar (Primary Key) Adı |
+|---------------------|-----------------------------------|
+| ORTAK.KISI           | KisiKey                           |
+| MUHASEBE.FIS         | FisKey|
+| BORDRO.ILAC_ALIMI_ALINAN_ILACLAR | IlacAlimiAlinanIlaclarKey |
+| ORTAK.KISI_EK_BILGILER | KisiEkBilgilerKey |
 
 
 Eğer tanım tablolarının primary key'ı seçiliyor ise TabloIsmi + (No, Turu, TurNo, Tipi, TipNo) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır. Örneğin:
 
 
-\begin{tabular}{@{}ll@{}}
-
-\toprule
-
-Tablo Adı & Primary Key Adı \\ 
-
-\midrule
-
-TT_ORTAK.Cinsiyet & CinsiyetTipNo \\ 
-TT_ORTAK.SEHIR & SehirNo  \\ 
-TT_OZGECMIS.EGITIM_TIP & EgitimTipNo \\ 
-TT_OZGECMIS.YABANCI_DIL_SINAV_TUR & YabanciDilSinavTurNo \\ 
-\bottomrule
-\end{tabular}
-
-
+| Tablo Adı           | Birinci Anahtar (Primary Key) Adı |
+|---------------------|-----------------------------------|
+| TT_ORTAK.CINSIYET   | CinsiyetTipNo                           |
+| TT_ORTAK.SEHIR        | SehirNo|
+| TT_OZGECMIS.EGITIM_TIP | EgitimTipNo |
+| TT_OZGECMIS.YABANCI_DIL_SINAV_TUR | YabanciDilSinavTurNo |
 
 ### Kolon İsimlendirme - Foreign Key
 
 Kolonlarda ikincil anahtar isimleri verilirken dikkat edilmesi gereken kural,
-referans edilen tablonun bir tanım tablosumu yoksa bir ana tablomu olduğu kuralıdır.
-Eğer bir ana tabloya referans veriliyorsa TabloIsmi + Key kullanılmalıdır.
-Eğer bir tanım tablosuna referans veriliyorsa TabloIsmi + (No, Turu, TurNo, Tipi, TipNo)
-gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır.
+referans edilen tablonun bir tanım tablosu mu yoksa bir ana tablomu olduğu kuralıdır.
+
+- Eğer bir ana tabloya referans veriliyorsa TabloIsmi + Key kullanılmalıdır.
+- Eğer bir tanım tablosuna referans veriliyorsa TabloIsmi + (No, Turu, TurNo, Tipi, TipNo) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır.
+
 Bu sayede bir tablo incelenirken hangi tablolara referans verdiği daha rahat bir
-sekilde anlaşılacaktır. 
-Ayrıca verilen referansın bir tanım tablosunamı yoksa bir ana tabloyamı yapıldığı
+sekilde anlaşılacaktır.
+Ayrıca verilen referansın bir tanım tablosuna yoksa bir ana tabloya verildiği
 daha iyi anlaşılacaktır.
 
-Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise,
-kolon isminde bu durumun belirtilmesi ve aynı zamanda tablo isminin kullanılması daha iyi 
-olur.
+Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon isminde bu durumun belirtilmesi ve aynı zamanda tablo isminin kullanılması daha iyi olur.
 
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 
@@ -193,9 +173,7 @@ olur.
 
 - GelisYoluTip
 - VatandasBasvuruReferansKey
-\end{itemize}
 
-\end{itemize}
 
 Bu tabloyu okuduğumuzda DilekceKey primary key, 
 BasvuruSahibiKisiKey ve VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
