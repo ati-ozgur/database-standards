@@ -2,8 +2,7 @@
 
 ## Kurulum Notları Collation
 
-
-Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir. 
+Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir.
 
 - CI: Case Insensitive (Büyük küçük harf ayrımı yok)
 - CS: Case sensitive (Büyük küçük harf ayrımı var)
@@ -93,13 +92,13 @@ Kolon isimleri kullanılırken türkçe karakterler (İ,Ü,ı ..) kullanılmamal
 Bakınız aşağıdaki örnekler.
 
 
-\begin{enumerate}
-\item Ad
-\item Soyad
-\item IkinciAdi
-\item TcKimlikNo
-\item SehirNo
-\end{enumerate}
+
+- Ad
+- Soyad
+- IkinciAdi
+- TcKimlikNo
+- SehirNo
+
 
 Raporlama açısından bütün tablo'ların ve anlamı açık olmayan kolanların descriptionlarının yazılması tavsiye edilir.
 Bu sayede veritabanından otomatik rapor çıkaran araçların raporları daha anlamlı olacaktır.
@@ -111,11 +110,11 @@ Bu sayede veritabanından otomatik rapor çıkaran araçların raporları daha a
 Primary key - Birincil anahtar isimlerinin nasıl olması gerektiğine proje başında karar verilmeli ve bu isimlendirmeye proje boyunca uyulmalıdır.
 Buna göre birincil anahtar için aşağıdaki kelimelerden biri seçilmelidir.
 
-\begin{enumerate}
-\item Key
-\item ID
-\item Id
-\end{enumerate}
+
+- Key
+- ID
+- Id
+
 
 Bazı projelerde KayitNo kullanılmaktadır.
 Bu kelime uzun olduğu için bana göre yukarıdakiler daha iyi seçimlerdir.
@@ -183,17 +182,17 @@ olur.
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 
 
-\item BILGI_EDINME.DILEKCE
+- BILGI_EDINME.DILEKCE
 
-\item DilekceKey
-
-
-\item GonderenIP
-\item DilekceIcerik
+- DilekceKey
 
 
-\item GelisYoluTip
-\item VatandasBasvuruReferansKey
+- GonderenIP
+- DilekceIcerik
+
+
+- GelisYoluTip
+- VatandasBasvuruReferansKey
 \end{itemize}
 
 \end{itemize}
@@ -235,8 +234,8 @@ TipNo(...) okunduğu zaman bir tanım tablosuna referans düşünülürken, Key 
 Yazi değerleri eger değişken ise varchar ile, eğer sabit bir değer ise char olarak tutulmalıdır. Örneğin:
 
 
-\item Eğer bilgi girilen tip daima aynı sayıda ise örnek: Posta Kodu gibi char olarak tanımlanmalıdır.		 
-\item Eğer bilgi girilen değer değişken bir değer ise, ad soyad gibi varchar olarak tanımlanmalıdır.
+- Eğer bilgi girilen tip daima aynı sayıda ise örnek: Posta Kodu gibi char olarak tanımlanmalıdır.		 
+- Eğer bilgi girilen değer değişken bir değer ise, ad soyad gibi varchar olarak tanımlanmalıdır.
 
 
 
@@ -248,8 +247,8 @@ Sayı değerleri için alabilecekleri aralıkları düşünerek tiny int, short 
 
 
 
-\item   Tablodaki değer  -32,768 - 32,767   smallint veri yapısını kullanın.
-\item   eğer tamsayı değer  -2,147,483,648 - 2,147,483,647 arası ise int veri yapısını kullanın.
+-   Tablodaki değer  -32,768 - 32,767   smallint veri yapısını kullanın.
+-   eğer tamsayı değer  -2,147,483,648 - 2,147,483,647 arası ise int veri yapısını kullanın.
 
 \end{itemize} 
 
@@ -257,12 +256,12 @@ Sayı değerleri için alabilecekleri aralıkları düşünerek tiny int, short 
 
 
 
-\item  Money SQL standartında olmadığından kullanılmamalıdır. 
-\item  Float ve double tam değerler değildir, yaklaşık değer olarak çalışırlar. 
+-  Money SQL standartında olmadığından kullanılmamalıdır. 
+-  Float ve double tam değerler değildir, yaklaşık değer olarak çalışırlar. 
 Para hesaplarında kesinlikle kullanılmamaları gerekir.
 
 e decimal bir birlerinin alias'ıdır. 
-\item Eğer para değerlerinde daha fazla küsürata ihtiyaç var ise   numeric(18,4)-decimal(18,4) gibi artırılabilir. 
+- Eğer para değerlerinde daha fazla küsürata ihtiyaç var ise   numeric(18,4)-decimal(18,4) gibi artırılabilir. 
 
 \end{itemize} 
  			
@@ -277,8 +276,8 @@ Tarih değerlerinin bu aralıkta olduğuna emin olunuz.
 
 
 
-\item Tarih bilgilerini tutarken smalldatetime tercih ediniz. 			
-\item Eğer sadece  yıl bilgisi tutacaksanız, Mezuniyet yılı smallint tutabilirsiniz. 
+- Tarih bilgilerini tutarken smalldatetime tercih ediniz. 			
+- Eğer sadece  yıl bilgisi tutacaksanız, Mezuniyet yılı smallint tutabilirsiniz. 
 
 
   $  CHECK  (([GirisSene]>=(1900) AND   [GirisSene]<=datepart(year,getdate()))) $
@@ -293,8 +292,8 @@ Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
 ### Diger Notlar
 
 
-\item   Tablolarda mümkün olduğunca girilen bilgiler not null yapılmalıdır.
-\item   Eğer anlamlı bir default/varsayılan değer verilebiliyorsa verilmelidir. Örneğin GuncellemeTarih default now() verilebilir.
+-   Tablolarda mümkün olduğunca girilen bilgiler not null yapılmalıdır.
+-   Eğer anlamlı bir default/varsayılan değer verilebiliyorsa verilmelidir. Örneğin GuncellemeTarih default now() verilebilir.
 \end{itemize}  			
 
 
@@ -326,10 +325,10 @@ Stored Procudure'lara isim verirken tablo ismi + yaptığı işlem şeklinde  is
     
 
 
-\item Tablo Ismi + yaptığı iş 
-\item usp_PersonelAraAdiVeSoyadiIle 
-\item usp_Personel_Oku_Tum 
-\item usp_MuhasebeYillikMizanHesapla
+- Tablo Ismi + yaptığı iş 
+- usp_PersonelAraAdiVeSoyadiIle 
+- usp_Personel_Oku_Tum 
+- usp_MuhasebeYillikMizanHesapla
 
 a
 \end{itemize}
@@ -340,8 +339,8 @@ Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıd�
 ## İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
 
 
-\item INSAN_KAYNAKLARI.MUSTERI 
-\item TANIM_TABLOLARI.NUFUS_CUZDANI_VERILIS_NEDENI
+- INSAN_KAYNAKLARI.MUSTERI 
+- TANIM_TABLOLARI.NUFUS_CUZDANI_VERILIS_NEDENI
 \end{itemize}  
 
 
@@ -351,10 +350,10 @@ Tablo ve görüntülere (view) ayrı isimler vermiyoruz.
 ## İsimlendirme Konvansiyonu - Column-Kolon}  
 Her kelimenin ilk harfi büyük yazılır. 
 
-\item MusteriKey 
-\item SonDegistirmeTarihi
-\item TipNo
-\item MusteriKey
+- MusteriKey 
+- SonDegistirmeTarihi
+- TipNo
+- MusteriKey
 
 
 
@@ -367,10 +366,10 @@ Unique indexler UQ ile başlarken, diğer indexler IX ile başlamalıdır.
 
 
 
-\item 
-\item IX_Musteri_MusteriNo
-\item IX_Satislar_TipNo
-\item IX_Satislar_MusteriKey
+- 
+- IX_Musteri_MusteriNo
+- IX_Satislar_TipNo
+- IX_Satislar_MusteriKey
 
 o
 
@@ -383,16 +382,16 @@ o
 
 ## İsimlendirme Konvansiyonu - Yabancı anahtar (Foreign key)}  
 
-\item  FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
-\item FK_MusteriMusteriNoSiparisMusteriNo
+-  FK_TabloIsmi1KolonIsmi1FK_TabloIsmi2KolonIsmi2 
+- FK_MusteriMusteriNoSiparisMusteriNo
 \end{itemize}
 Her kelimenin ilk harfi büyük yazılır. 
 
 
 ## İsimlendirme Konvansiyonu - Default - Varsayılan}  
 
-\item DF_
-\item DF_PERSONEL_IlkGirisTarihi 
+- DF_
+- DF_PERSONEL_IlkGirisTarihi 
 \end{itemize}  
   
 
@@ -400,8 +399,8 @@ Her kelimenin ilk harfi büyük yazılır.
 
 ## İsimlendirme Konvansiyonu - Constraint }  
 
-\item CK_
-\item CK_OKUL_BILGILERI_GirisSenesi  
+- CK_
+- CK_OKUL_BILGILERI_GirisSenesi  
 \end{itemize}  
   
 
@@ -411,8 +410,8 @@ Her kelimenin ilk harfi büyük yazılır.
 utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir kelime gelicektir. 
 
 
-\item utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
-\item utrX_ORTAK_KISI_Delete
+- utrX_ + tablo ismi + islem (insert (i), update (u), delete (d))
+- utrX_ORTAK_KISI_Delete
 \end{itemize}  
 
 
