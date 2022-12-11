@@ -1,6 +1,7 @@
 # Karkas SQL Server Veri tabanı Standartları
 
-## Kurulum Notları
+## Kurulum Notları Collation
+
 
 Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir. 
 
@@ -10,6 +11,9 @@ Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seç
 
 Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır.
 Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında varchar yada char olarak tutulmalıdır.
+
+TODO: Sql server 2019 utf8 desteğine bak
+
 
 ## Şema (Schema) Kavramı
 
@@ -34,23 +38,20 @@ Bu yapıda aşağıdaki şemaların açılması uygun olacaktır.
 - FIRMALAR
 - TT_FIRMALAR
 
-
-
-
 Burada muhasebe, insan kaynakları ve bordro şemaları zaten ihtiyaç duyulan şemalardır.
-Bunlara ek olarak kişi bilgilerinin tutulması için ad, soyad, kimlik bilgileri etc ORTAK şeması önerilmektedir. 
+Bunlara ek olarak kişi bilgilerinin tutulması için ad, soyad, kimlik bilgileri etc ORTAK şeması önerilmektedir.
 TT_ORTAK şeması buradaki bilgiler için gerekli tanım tablolarını tutacaktır.
 Örneğin TT_ORTAK.CINSIYET ismindeki bir tanım tablosu cinsiyet bilgileri tutabilir.
-Burada Kisi için tutulacak bilgiler herkes için kesin tutulması gereken bilgilerdir. 
-Örneğin ad soyad, tc kimlik no, resim gibi. 
-Ama eger sadece yazılımı kullanan kurumdaki, kişilere ait  (örneğin kurum sicil no, kurum eposta, kurum telefon) gibi bilgiler  var ise  bunların farklı şemada tutulması daha yararlı olacaktır. 
+Burada Kişi için tutulacak bilgiler herkes için kesin tutulması gereken bilgilerdir.
+Örneğin ad soyad, tc kimlik no, resim gibi.
+Ama eger sadece yazılımı kullanan kurumdaki, kişilere ait  (örneğin kurum sicil no, kurum eposta, kurum telefon) gibi bilgiler var ise bunların farklı şemada tutulması daha yararlı olacaktır.
 
 Buraya FIRMALAR şeması muhasebe firmalarının fatura kesecekleri firma bilgileri için eklenmiştir.
-Firma, Kisi bilgileri bir çok modül tarafından ihtiyaç duyulan bilgiler oldukları için bunların ayrı şemalarda tutulmaları daha yararlı olacaktır.
+Firma, Kişi bilgileri bir çok modül tarafından ihtiyaç duyulan bilgiler oldukları için bunların ayrı şemalarda tutulmaları daha yararlı olacaktır.
 
-Son olarak Ozluk bilgileri, Bordro ve insan kaynaklarının ihtiyaç duydukları ortak bilgileri taşıyacaktır.
+Son olarak Özlük bilgileri, Bordro ve insan kaynaklarının ihtiyaç duydukları ortak bilgileri taşıyacaktır.
 Burada bu bilgiler sadece insan kaynakları şeması yada bordro şeması yerine ikisinin ortak kullandığı bir şemada olması daha uygundur.
-Yani diğer bir deyişle; eğer bir tablo birden fazla modül tarafından kullanılıyor ise, bu ortaklığı belirtecek yeni bir şema gerekirse açılmalıdır. 
+Yani diğer bir deyişle; eğer bir tablo birden fazla modül tarafından kullanılıyor ise, bu ortaklığı belirtecek yeni bir şema gerekirse açılmalıdır.
 Bu şema ismi eğer dışarıdan veri alınıyorsa bunu anlatan bir isim, eğer 2 modülün ortak noktası ise, bu ortak nokta olabilir.
 Sadece 2 modül tarafından kullanılacak bir tablo ORTAK şemasını eklenmemelidir.
 
@@ -85,10 +86,9 @@ Veritabanında oluşturulan Tablo ve Şema isimleri tüm harfler büyük, Kelime
 - MUHASEBE.FIS
 - MUHASEBE.FIS_DETAY
 
-
 ### Kolon İsimlendirme
 
-Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her kelime bü harf ile baslamalı, diğer harfler kucuk harf olmalıdır.
+Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her kelime bü harf ile başlamalı, diğer harfler küçük harf olmalıdır.
 Kolon isimleri kullanılırken türkçe karakterler (İ,Ü,ı ..) kullanılmamalıdır.
 Bakınız aşağıdaki örnekler.
 
@@ -184,17 +184,17 @@ olur.
 
 
 \item BILGI_EDINME.DILEKCE
-	
-		\item DilekceKey
 
-y
-		\item GonderenIP
-		\item DilekceIcerik
-	
-	
-		\item GelisYoluTip
-		\item VatandasBasvuruReferansKey
-	\end{itemize}
+\item DilekceKey
+
+
+\item GonderenIP
+\item DilekceIcerik
+
+
+\item GelisYoluTip
+\item VatandasBasvuruReferansKey
+\end{itemize}
 
 \end{itemize}
 
@@ -238,7 +238,7 @@ Yazi değerleri eger değişken ise varchar ile, eğer sabit bir değer ise char
 \item Eğer bilgi girilen tip daima aynı sayıda ise örnek: Posta Kodu gibi char olarak tanımlanmalıdır.		 
 \item Eğer bilgi girilen değer değişken bir değer ise, ad soyad gibi varchar olarak tanımlanmalıdır.
 
- 
+
 
 Eğer veri tabanında kullanılan genel dilden (türkçe olmayan) farklı değer girilebilir ise nchar,nvarchar tanımlanmalıdır.
 
@@ -280,7 +280,7 @@ Tarih değerlerinin bu aralıkta olduğuna emin olunuz.
 \item Tarih bilgilerini tutarken smalldatetime tercih ediniz. 			
 \item Eğer sadece  yıl bilgisi tutacaksanız, Mezuniyet yılı smallint tutabilirsiniz. 
 
- 
+
   $  CHECK  (([GirisSene]>=(1900) AND   [GirisSene]<=datepart(year,getdate()))) $
 Yukarıdakı kısıtlama giris senesinin 1900 ile şu an bulunduğumuz sene arasında kalmasını sağlamaktadır.
 \end{itemize}  			
@@ -297,7 +297,7 @@ Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
 \item   Eğer anlamlı bir default/varsayılan değer verilebiliyorsa verilmelidir. Örneğin GuncellemeTarih default now() verilebilir.
 \end{itemize}  			
 
- 
+
   
 \section{Yazılım Geliştirme Yetkileri}  									 
 Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması 
@@ -345,7 +345,7 @@ Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıd�
 \end{itemize}  
 
 
- 
+
 Tablo ve görüntülere (view) ayrı isimler vermiyoruz.		  
 
 ## İsimlendirme Konvansiyonu - Column-Kolon}  
@@ -356,7 +356,7 @@ Her kelimenin ilk harfi büyük yazılır.
 \item TipNo
 \item MusteriKey
 
- 
+
 
 
 ## İsimlendirme Konvansiyonu - Index}  
@@ -388,7 +388,7 @@ o
 \end{itemize}
 Her kelimenin ilk harfi büyük yazılır. 
 
- 
+
 ## İsimlendirme Konvansiyonu - Default - Varsayılan}  
 
 \item DF_
@@ -416,7 +416,7 @@ utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir k
 \end{itemize}  
 
 
- 
+
   
 \section{Düzenleme Geçmişi} 
 
