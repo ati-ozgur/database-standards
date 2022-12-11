@@ -9,6 +9,8 @@ book:
   date-format: "YYYY-MM-DD"
   chapters:
     - index.qmd
+    - sql-server-tr-veri-tabanı-standart.md
+    - postgres-standards-en.md
 
 
 #toc: true
