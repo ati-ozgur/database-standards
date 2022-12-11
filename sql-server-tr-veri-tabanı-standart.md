@@ -3,20 +3,23 @@
 ## Kurulum Notları
 
 Veritabanı kurulurken, SQL Server içinden Collation olarak  Turkish_CI_AS seçilmelidir. 
-Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır. 
-Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında  varchar yada char olarak tutulmalıdır.
 
+- CI: Case Insensitive (Büyük küçük harf ayrımı yok)
+- CS: Case sensitive (Büyük küçük harf ayrımı var)
+- AS: Accent-sensitive (ı ve i aynı değildir)
+
+Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır.
+Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında varchar yada char olarak tutulmalıdır.
 
 ## Şema (Schema) Kavramı
 
 SQL Server şema (schema) kavramını en iyi şekilde uygulayan veri tabanları arasındadır.
 Bu yüzden schema yapısının SQL server veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
 Bu yapıda her ana modül için, "bir ana şema" + "bir tanım tablosu şema"'sı açılması tavsiye edilmektedir.
-Referential  Integrity korunması açısından bütün uygulama tek bir veritabanında çalışmalıdır.
+Bilgi tutarlılığı (Referential Integrity) korunması açısından bütün uygulama tek bir veritabanında çalışmalıdır.
 
-Örneğin ihtiyaç duyduğunuz modüllerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim. 
+Örneğin ihtiyaç duyduğunuz modüllerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim.
 Bu yapıda aşağıdaki şemaların açılması uygun olacaktır.
-
 
 - ORTAK
 - TT_ORTAK
