@@ -285,7 +285,7 @@ Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server bunun Syste
   
 ## İsimlendirme Konvansiyonu
   
-### İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar } 
+### İsimlendirme Konvansiyonu - Stored Procedure - Gömülü Yordamlar
 
 Stored Procudure'lara isim verirken modül/ ana tablo ismi + yaptığı işlem şeklinde isim verin.
     
@@ -299,7 +299,7 @@ Stored Procudure'lara isim verirken modül/ ana tablo ismi + yaptığı işlem �
 Not bu isimler örnek olsun diye verilmiştir. 
 Veritabanında basit CRUD ve arama işlemleri için stored procedure olmamalıdır.
 
-### İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü}  
+### İsimlendirme Konvansiyonu - Table and View-Tablo ve Görüntü
 
 
 - INSAN_KAYNAKLARI.MUSTERI 
