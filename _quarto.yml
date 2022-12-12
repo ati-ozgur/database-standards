@@ -10,6 +10,7 @@ book:
   chapters:
     - index.qmd
     - sql-server-tr-veri-tabanı-standart.qmd
+    - oracle-tr-veri-tabanı-standart.qmd
 #    - postgres-standards-en.md
 
 

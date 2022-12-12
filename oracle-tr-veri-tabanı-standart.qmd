@@ -11,8 +11,9 @@ Oracle veritabanı kurulurken, character set olarak AL32UTF8 seçilmelidir.
 
 ## Şema (Schema) Kavramı
 
-SQL Server şema (schema) kavramını en iyi şekilde uygulayan veri tabanları arasındadır.
-Bu yüzden schema yapısının SQL server veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
+Oracle veri tabanında şema (schema) ve kullanıcılar (users) aynı şeydir.
+Şema (schema) kavramını oracle GUI araçlarında çok iyi desteklemese, diğer açılardan şema desteği son derece düzgün çalışır.
+Bu yüzden şema yapısının oracle veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
 Bu yapıda her ana modül için, "bir ana şema" + "bir tanım tablosu şema"'sı açılması tavsiye edilmektedir.
 Bilgi tutarlılığı (Referential Integrity) korunması açısından bütün uygulama tek bir veritabanında çalışmalıdır.
 
@@ -69,7 +70,7 @@ TODO: Örnek diagram ekle
 Şema ismi olarak kullandığınız isimleri tablo isimleri olarak kullanmayın.
 Yani eğer BORDRO diye bir şemanız varsa, bu şema içinde veya diğer şemaların içinde BORDRO diye bir tablonuz olmamalıdır.
 
-VS.NET içinde proje ismi olarak kullanacağınız bir ismi şema ismi  olarak kullanmayınız.
+VS.NET içinde proje ismi olarak kullanacağınız bir ismi şema ismi olarak kullanmayınız.
 Yada şema isimlerinizi, VS.NET içinde proje ismi olarak vermeyin.
 C# Derleyici (C# Compiler)  bu durumda sorun çıkarmaktadır.
 
@@ -82,15 +83,17 @@ Veritabanında oluşturulan Tablo ve Şema isimleri tüm harfler büyük, Kelime
 
 ### Kolon İsimlendirme
 
-Kolon isimleri verilirken .NET isimlendirme konvansiyonuna uygun olarak her kelime bü harf ile başlamalı, diğer harfler küçük harf olmalıdır.
+Oracle kolon isimlerini verirken, ne yazıkkı büyük küçük harf ayrımı yapmamaktadır.
+Bundal dolayı kolon isimleri verilirken BAGIRAN_SNAKE_CASE kullanmak zorundayız.
+Tüm harfler büyük olmalı ve kelimeler alt çizgi _ ile ayrılmalıdır.
 Kolon isimleri kullanılırken türkçe karakterler (İ,Ü,ı ..) kullanılmamalıdır.
 Bakınız aşağıdaki örnekler.
 
-- Ad
-- Soyad
-- IkinciAdi
-- TcKimlikNo
-- SehirNo
+- AD
+- SOYAD
+- IKINCI_ADI
+- TC_KIMLIK_NO
+- SEHIR_NO
 
 Raporlama açısından bütün tabloların ve anlamı açık olmayan kolanların tanımlarının (description) yazılması tavsiye edilir.
 Ama tanım yazılması iyi isim verilmesinden daha önemsizdir.
@@ -102,16 +105,14 @@ Bu sayede veritabanından otomatik rapor çıkaran araçların raporları daha a
 Primary key - Birincil anahtar isimlerinin nasıl olması gerektiğine proje başında karar verilmeli ve bu isimlendirmeye proje boyunca uyulmalıdır.
 Buna göre birincil anahtar için aşağıdaki kelimelerden biri seçilmelidir.
 
-- Key
+- KEY
 - ID
-- Id
 
-Bazı projelerde KayitNo kullanılmaktadır.
+Bazı projelerde KAYITNO kullanılmaktadır.
 Bu kelime uzun olduğu için bana göre yukarıdakiler daha iyi seçimlerdir.
 
 Key anahtar, Id Identity (kimlik) kelimelerinin kısaltmasıdır.
 Projede bunlardan sadece birinin kullanılması daha uygun olacaktır.
-Aynı şekilde ID ve Id olarak karar verilmeli ve hep aynı şekilde kullanılmalıdır.
 
 Aşağıdaki örneklerde Key kelimesi seçilmiştir.
 
@@ -120,29 +121,30 @@ Birincil Anahtarları TABLO ADI + Key olarak verilmesi tavsiye edilmektedir.
 
 | Tablo Adı           | Birinci Anahtar (Primary Key) Adı |
 |---------------------|-----------------------------------|
-| ORTAK.KISI           | KisiKey                           |
-| MUHASEBE.FIS         | FisKey|
-| BORDRO.ILAC_ALIMI_ALINAN_ILACLAR | IlacAlimiAlinanIlaclarKey |
-| ORTAK.KISI_EK_BILGILER | KisiEkBilgilerKey |
+| ORTAK.KISI           | KISI_KEY                           |
+| MUHASEBE.FIS         | FIS_KEY					|
+| BORDRO.ILAC_ALIMI_ALINAN_ILACLAR | ILAC_ALIMI_ALINAN_ILACLAR_KEY |
+| ORTAK.KISI_EK_BILGILER | KISI_EK_BILGILER_KEY |
 
 
-Eğer tanım tablolarının primary key'ı seçiliyor ise TabloIsmi + (No, Turu, TurNo, Tipi, TipNo) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır. Örneğin:
+Eğer tanım tablolarının primary key'ı seçiliyor ise TabloIsmi + (NO, TURU, TUR_NO, TIPI, TIP_NO) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır. Örneğin:
 
 
 | Tablo Adı           | Birinci Anahtar (Primary Key) Adı |
 |---------------------|-----------------------------------|
-| TT_ORTAK.CINSIYET   | CinsiyetTipNo                           |
-| TT_ORTAK.SEHIR        | SehirNo|
-| TT_OZGECMIS.EGITIM_TIP | EgitimTipNo |
-| TT_OZGECMIS.YABANCI_DIL_SINAV_TUR | YabanciDilSinavTurNo |
+| TT_ORTAK.CINSIYET   | CINSIYET_TIP_NO                           |
+| TT_ORTAK.SEHIR        | SEHIR_NO|
+| TT_OZGECMIS.EGITIM_TIP | EGITIM_TIP_NO |
+| TT_OZGECMIS.YABANCI_DIL_SINAV_TUR | YABANCI_DIL_SINAV_TUR_NO |
 
 ### Kolon İsimlendirme - Foreign Key
 
 Kolonlarda ikincil anahtar isimleri verilirken dikkat edilmesi gereken kural,
 referans edilen tablonun bir tanım tablosu mu yoksa bir ana tablomu olduğu kuralıdır.
 
-- Eğer bir ana tabloya referans veriliyorsa TabloIsmi + Key kullanılmalıdır.
-- Eğer bir tanım tablosuna referans veriliyorsa TabloIsmi + (No, Turu, TurNo, Tipi, TipNo) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır.
+- Eğer bir ana tabloya referans veriliyorsa TabloIsmi + KEY kullanılmalıdır.
+- Eğer bir tanım tablosuna referans veriliyorsa TabloIsmi + (NO, TURU, TURNO,TUR_NO, TIPI, TIP_NO,TIPNO) gibi kolon isminden sonra türkçe okunmaya uygun bir ek kullanılmalıdır.
+TURNO veya TUR_NO kullanılabilir ama bir tanesinin seçilip tutarlı olunması tavsiye olunur.
 
 Bu sayede bir tablo incelenirken hangi tablolara referans verdiği daha rahat bir
 sekilde anlaşılacaktır.
@@ -153,7 +155,7 @@ Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon i
 
 Örneğin Bilgi Edinme için tasarlanan tablo isimlerine bir bakalım.
 
-{{< include ./mermaid-dilekce.qmd >}}
+{{< include ./mermaid-dilekce-oracle.qmd >}}
 
 
 Bu tabloyu okuduğumuzda 
