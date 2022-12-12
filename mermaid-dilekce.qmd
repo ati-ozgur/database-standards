@@ -2,6 +2,7 @@
 erDiagram
     DILEKCE {
         uniqueidentifier DilekceKey
+        uniqueidentifier BasvuruSahibiKisiKey
         string GonderenIP
         string DilekceIcerik
         int CevapIstekTurNo

@@ -2,10 +2,11 @@
 erDiagram
     DILEKCE {
         uniqueidentifier DILEKCE_KEY
+		uniqueidentifier BASVURU_SAHIBI_KISI_KEY
         string GONDEREN_IP
         string DILEKCE_ICERIK
-        int CEVAP_ISTEK_TUR_NO
-        int GELIS_YOLU_TUR_NO
+        int CEVAP_ISTEK_TURNO
+        int GELIS_YOLU_TURNO
         uniqueidentifier VATANDAS_BASVURU_REFERANS_KEY
     }
 ```
