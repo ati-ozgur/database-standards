@@ -1,6 +1,0 @@
-# Postgres Standards English
-
-
-
-
-
