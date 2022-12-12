@@ -1,0 +1,12 @@
+```{mermaid}
+erDiagram
+    DILEKCE {
+        uniqueidentifier DILEKCE_KEY
+        string GONDEREN_IP
+        string DILEKCE_ICERIK
+        int CEVAP_ISTEK_TUR_NO
+        int GELIS_YOLU_TUR_NO
+        uniqueidentifier VATANDAS_BASVURU_REFERANS_KEY
+    }
+```
+
