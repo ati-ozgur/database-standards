@@ -160,26 +160,38 @@ Not eğer verilen ikincil anahtar kolonu bir iş gereği yüzünden ise, kolon i
 
 Bu tabloyu okuduğumuzda 
 
-- DilekceKey primary key, 
-- BasvuruSahibiKisiKey ana tablolara referans eden foreign key
--  VatandasBasvuruReferansKey ana tablolara referans eden foreign key,
--  CevapIstekTurNo tanım tablolarına referans eden bilgiler. 
--  GelisYoluTurNo tanım tablolarına referans eden bilgiler.
+- DILEKCE_KEY primary key, 
+- BASVURU_SAHIBI_KISI_KEY ana tablolara referans eden foreign key
+-  VATANDAS_BASVURU_REFERANS_KEY ana tablolara referans eden foreign key,
+-  CEVAP_ISTEK_TURNO tanım tablolarına referans eden bilgiler. 
+-  GELIS_YOLU_TURNO tanım tablolarına referans eden bilgiler.
 
 Burada BasvuruSahibiKisiKey ORTAK.KISI tablosuna büyük ihtimal ile referans vermektedir.
-KisiKey yerine BasvuruSahibiKisiKey kullanılması bu anahtarı dilekce basvuranı ifade ettiğini göstermektedir. 
+KISI_KEY yerine BASVURU_SAHIBI_KISI_KEY kullanılması bu anahtarı dilekce basvuranı ifade ettiğini göstermektedir. 
 Bu anahtar kullanılarak kisi adı soyadı gibi bilgilere ulaşılabilir.
 
-CevapIstekTurNo ve GelisYoluTurNo kolonları ile TT_BILGI_EDINME şemasında veya başka bir TT şemasında CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
+CEVAP_ISTEK_TURNO ve GELIS_YOLU_TURNO kolonları ile TT_BILGI_EDINME şemasında veya başka bir TT şemasında CEVAP_ISTEK ve GELIS_YOLU isminde tablolar olduğunu biliyoruz.
 
 ## Kolon Veri Yapıları
 
 ### Primary Key
 
 Birincil anahtar (Primary Key) konulmayan tablo olmayacaktır.
-Primary key değerleri olarak uniqueidentifier veya Identity seçilmeli proje boyunca benzer bir yapı kullanılmalıdır.
-Primary key Sentetik Anahtar (Surrogate Key) olarak int IDENTITY değerleri yerine uniqueidentifier tercih edilmesi, kod yazılması kolaylığı açısından değerlendirilmeli ve proje başlangıcında karar verilmelidir.
-Uniqueidentifier eğer PK olarak kullanılıyorsa default değer olarak newid() olmalıdır.
+Primary key değerleri olarak guid veya identity seçilmeli proje boyunca benzer bir yapı kullanılmalıdır.
+Yeni oracle versiyonları, identity kolonlarını desteklemektedir.
+
+
+Primary key Sentetik Anahtar (Surrogate Key) olarak int IDENTITY değerleri yerine guid tercih edilmesi, kod yazılması kolaylığı açısından değerlendirilmeli ve proje başlangıcında karar verilmelidir.
+Eğer guid PK olarak kullanılıyorsa default değer olarak SYS_GUID() olmalıdır.
+
+```sql
+CREATE TABLE TEST ( TEST_KEY RAW(16) default SYS_GUID() ) 
+
+```
+
+
+
+
 
 ### Foreign Key
 
