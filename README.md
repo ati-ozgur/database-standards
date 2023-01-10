@@ -6,3 +6,11 @@
 - add how to manage connection strings in secret
 - may be add how to manage connection strings in secret kubernetes
 - add APP user usage
+
+
+
+## Links
+
+- https://learn.microsoft.com/en-us/sql/relational-databases/security/sql-server-security-best-practices?view=sql-server-ver16
+
+
