@@ -12,7 +12,7 @@
 
 {{< include ./stored-procedures-functions.md >}}
 
-
+{{< include ./isimlendirme-diger.md >}}
 
 
   
@@ -22,7 +22,7 @@ Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar a
 En doğrusu yazılım geliştirici kullanıcılarının bir role atanması ve bu rolün kısıtlanması olabilir.
 
 
-{{< include ./isimlendirme-diger.md >}}
+
   
 
 {{< include ./application-user.md >}}
