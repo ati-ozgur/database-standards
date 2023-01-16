@@ -1,76 +1,12 @@
 # Karkas SQL Server Veri tabanı Standartları
 
-## Kurulum Notları Collation
 
-Veritabanı kurulurken, SQL Server içinden Collation olarak aşağıdakilerden biri seçilmelidir.
+{{< include ./kurulum.md >}}
 
-- Turkish_CI_AS : Turkish, case-insensitive, accent-sensitive, kana type-insensitive, width-insensitive
-- Turkish_100_CI_AS_SC_UTF8: Turkish-100, case-insensitive, accent-sensitive, kana type-insensitive, width-insensitive, supplementary characters, UTF8 (SQL Server 2019)
 
-Buradaki kelimelerin anlamı aşağıdaki gibidir.
 
-- CI: Case Insensitive (Büyük küçük harf ayrımı yok)
-- CS: Case sensitive (Büyük küçük harf ayrımı var)
-- AS: Accent-sensitive (ı ve i aynı değildir)
+{{< include ./sema.md >}}
 
-Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır.
-Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında varchar yada char olarak tutulmalıdır.
-SQL Server 2019 ve sonrasını kullanıyorsanız, UTF8 seçmeniz tavsiye edilir.
-
-## Şema (Schema) Kavramı
-
-SQL Server şema (schema) kavramını en iyi şekilde uygulayan veri tabanları arasındadır.
-Bu yüzden schema yapısının SQL server veri tabanı tasarımı yapılırken kullanılması tavsiye edilir.
-Bu yapıda her ana modül için, "bir ana şema" + "bir tanım tablosu şema"'sı açılması tavsiye edilmektedir.
-Bilgi tutarlılığı (Referential Integrity) korunması açısından bütün uygulama tek bir veritabanında çalışmalıdır.
-
-Örneğin ihtiyaç duyduğunuz modüllerin Insan Kaynakları, Muhasebe ve Bordro olduğunu düşünelim.
-Bu yapıda aşağıdaki şemaların açılması uygun olacaktır.
-
-- ORTAK
-- TT_ORTAK
-- MUHASEBE
-- TT_MUHASEBE
-- INSAN_KAYNAKLARI
-- TT_INSAN_KAYNAKLARI
-- BORDRO
-- TT_BORDRO
-- OZLUK_BILGILERI
-- TT_OZLUK_BILGILERI
-- FIRMALAR
-- TT_FIRMALAR
-
-Burada muhasebe, insan kaynakları ve bordro şemaları zaten ihtiyaç duyulan şemalardır.
-Bunlara ek olarak kişi bilgilerinin tutulması için ad, soyad, kimlik bilgileri etc ORTAK şeması önerilmektedir.
-TT_ORTAK şeması buradaki bilgiler için gerekli tanım tablolarını tutacaktır.
-Örneğin TT_ORTAK.CINSIYET ismindeki bir tanım tablosu cinsiyet bilgileri tutabilir.
-Burada Kişi için tutulacak bilgiler herkes için kesin tutulması gereken bilgilerdir.
-Örneğin ad soyad, tc kimlik no, resim gibi.
-Ama eger sadece yazılımı kullanan kurumdaki, kişilere ait  (örneğin kurum sicil no, kurum eposta, kurum telefon) gibi bilgiler var ise bunların farklı şemada tutulması daha yararlı olacaktır.
-
-Buraya FIRMALAR şeması muhasebe firmalarının fatura kesecekleri firma bilgileri için eklenmiştir.
-Firma, Kişi bilgileri bir çok modül tarafından ihtiyaç duyulan bilgiler oldukları için bunların ayrı şemalarda tutulmaları daha yararlı olacaktır.
-
-Son olarak Özlük bilgileri, Bordro ve insan kaynaklarının ihtiyaç duydukları ortak bilgileri taşıyacaktır.
-Burada bu bilgiler sadece insan kaynakları şeması yada bordro şeması yerine ikisinin ortak kullandığı bir şemada olması daha uygundur.
-Yani diğer bir deyişle; eğer bir tablo birden fazla modül tarafından kullanılıyor ise, bu ortaklığı belirtecek yeni bir şema gerekirse açılmalıdır.
-Bu şema ismi eğer dışarıdan veri alınıyorsa bunu anlatan bir isim, eğer 2 modülün ortak noktası ise, bu ortak nokta olabilir.
-Sadece 2 modül tarafından kullanılacak bir tablo ORTAK şemasını eklenmemelidir.
-
-Ana modül şemalarından 10 taneden fazla tablo bulunması bu modülün büyük bir modül olduğunu göstermektedir.
-Bu modül 2-3 ana modül olarak ayrılabilir.
-Örneğin personel için aşağıdaki gibi bir ayrım olabilir.
-
-- PERSONEL
-- PERSONEL_IZIN
-- PERSONEL_HARCAMALAR
-
-Ayrıca geçici daha sonra silinebilecek tabloların tutulması için GECICI veya TEMP isminde bir şemada eklenmesi uygun olacaktır.
-Aynı şekilde kısa süreli yedek işlemleri için, karışık bir güncelleme öncesinde ihtiyaç duyulabilecek yedek işlemleri için YEDEK şeması eklenebilir.
-
-Her modül ilişkileri (relations) gösteren diyagramlara sahip olmalıdır.
-
-TODO: Örnek diagram ekle
 
 ## Şema, Tablo, Kolon İsimlendirme
 
