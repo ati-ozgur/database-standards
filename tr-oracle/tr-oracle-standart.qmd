@@ -1,11 +1,6 @@
 # Karkas Oracle veri tabanı standartları
 
-## Kurulum Notları Collation
-
-Oracle veritabanı kurulurken, character set olarak AL32UTF8 seçilmelidir.
-[Choosing Unicode as a Database Character Set in Globalization Support Guide](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/nlspg/choosing-character-set.html) dokumanında oracle, her yeni veritabanı için unicode kullanılmasını tavsiye ediyor.
-
-> Oracle recommends using Unicode for all new system deployments. Migrating legacy systems to Unicode is also recommended. Deploying your systems today in Unicode offers many advantages in usability, compatibility, and extensibility. 
+{{< include ./kurulum.md >}}
 
 
 
@@ -15,6 +10,10 @@ Oracle veritabanı kurulurken, character set olarak AL32UTF8 seçilmelidir.
 
 {{< include ./veri-yapilari.md >}}
 
+{{< include ./stored-procedures-functions.md >}}
+
+
+
 
   
 ## Yazılım Geliştirme Yetkileri
@@ -22,19 +21,7 @@ Oracle veritabanı kurulurken, character set olarak AL32UTF8 seçilmelidir.
 Yazılım geliştiriciler için sınırlı yetkili veri tabanı kullanıcılar açılması ve SQL Sever Management Studio üzerinde işlem yapılırken bu  kullanıcılar ile sisteme girilmesi.düşünülmelidir.
 En doğrusu yazılım geliştirici kullanıcılarının bir role atanması ve bu rolün kısıtlanması olabilir.
 
-  	 
-## Stored Procedures - Functions
 
-Yazılım geliştiriciler Stored Procedure yazma gereksinimi duyarlarsa bunu veritabanı yöneticisi ve takım liderlerinin onayını	aldıktan sonra yapabileceklerdir.
-Veri tabanında mümkün olduğunca stored procedure ve trigger olmamalı, bunların yerine .NET kodları ile çözüm bulunmaya çalışılmalıdır.
-
-Stored procedure, function ve trigger'lar için macar notasyonu kullanıp kullanılmayacağına başta karar verilmelidir.
-Yazılım geliştirme araçlarının daha gelişmiş olması sebebi ile artık macar notasyonuna olan ihtiyaç azalmıştır.
-Ama eğer macar notasyonu kullanıyorsanız: 
-Stored Procudures usp_ ile, functionlar ufn_ ile, triggerler ise utnX_ ile başlamalıdır (X-->;i:insert, u:update, d:delete).
-
-Note: eğer bir stored Procedure sp veya xp ile başlarsa SQL server bunun System stored procedure'u olduğunu düşündüğü için ilk önce master veritabanında arayacaktır. 
-  
 {{< include ./isimlendirme-diger.md >}}
   
 
