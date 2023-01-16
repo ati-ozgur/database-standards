@@ -324,5 +324,7 @@ utrX + Tablo Ismi, yerine triggerin hangi işlem için olduğunu söyleyen bir k
 - utrX_ORTAK_KISI_Delete
   
 
+{{< include ./application-user.md >}}
+
 {{< include ./duzenleme-gecmis.md >}}
 
