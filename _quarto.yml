@@ -9,8 +9,8 @@ book:
   date-format: "YYYY-MM-DD"
   chapters:
     - index.qmd
-    - tr-sql-server/tr-sql-server-standart.qmd
-    - tr-oracle/tr-oracle-standart.qmd
+    - tr-sql-server/main-tr-sql-server-standart.qmd
+    - tr-oracle/main-tr-oracle-standart.qmd
 #    - postgres-standards-en.md
 
 
