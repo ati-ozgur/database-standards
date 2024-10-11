@@ -1,5 +1,7 @@
 ## Kurulum Notları Collation
 
+
+SQL Server 2019 ve sonrasını kullanıyorsanız, UTF8 seçmeniz tavsiye edilir.
 Veritabanı kurulurken, SQL Server içinden Collation olarak aşağıdakilerden biri seçilmelidir.
 
 - Turkish_CI_AS : Turkish, case-insensitive, accent-sensitive, kana type-insensitive, width-insensitive
@@ -13,4 +15,5 @@ Buradaki kelimelerin anlamı aşağıdaki gibidir.
 
 Nchar unicode olarak değerleri tuttuğu için 2 katı yer kaplamakta  ve daha yavaş çalışmaktadır.
 Eğer veritabanında aynı anda iki dil bilgisi tutulmayacaksa, yani hem rusça hem de türkçe bilgi, yazı değerleri veri tabanında varchar yada char olarak tutulmalıdır.
-SQL Server 2019 ve sonrasını kullanıyorsanız, UTF8 seçmeniz tavsiye edilir.
+
+Collation hakkında daha fazla [bilgi](https://learn.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support?view=sql-server-ver16)
