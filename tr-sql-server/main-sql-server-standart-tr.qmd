@@ -5,19 +5,19 @@
 
 
 
-{{< include ./sema.md >}}
+{{< include ./schema-tr.md >}}
 
 
 
-{{< include ./isimlendirme.md >}}
+{{< include ./naming-tr.md >}}
 
-{{< include ./veri-yapilari.md >}}
+{{< include ./data-types-tr.md >}}
 
 
   
-{{< include ./stored-procedures-functions.md >}}
+{{< include ./stored-procedures-functions-tr.md >}}
   	 
-{{< include ./isimlendirme-diger.md >}}
+{{< include ./naming-other-tr.md >}}
 
 ## Yazılım Geliştirme Yetkileri
 
