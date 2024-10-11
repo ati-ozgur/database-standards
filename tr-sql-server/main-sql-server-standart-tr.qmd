@@ -1,7 +1,7 @@
 # Karkas SQL Server Veri tabanı Standartları
 
 
-{{< include ./kurulum.md >}}
+{{< include ./installation-tr.md >}}
 
 
 
