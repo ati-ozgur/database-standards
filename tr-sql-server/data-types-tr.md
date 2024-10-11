@@ -73,7 +73,7 @@ Yukarıdakı kısıtlama giris senesinin 1900 ile şu an bulunduğumuz sene aras
 ### Resim Dosya gibi Binary Değerler
 
 Resim veya binary data tutmak için varbinary(max) tercih edin. 
-Veri tipi image SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
+Veri tipi **image** SQL Server'ın yeni versiyonlarında kullanılmayacaktır.
  
 ### Diger Notlar
 
